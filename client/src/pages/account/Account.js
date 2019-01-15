@@ -1,123 +1,114 @@
 import React, { Component } from "react";
-import DeleteBtn from "../components/DeleteBtn";
-import Jumbotron from "../components/Jumbotron";
-import API from "../utils/API";
-import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../components/Grid";
-import { List, ListItem } from "../components/List";
-import { Input, TextArea, FormBtn } from "../components/Form";
+import { FormErrors } from './FormErrors';
 
-class Accounts extends Component {
-  state = {
-    email: "",
-    password: "",
-    verifyPassword: "",
-    firstName: "",
-    lastName: "",
-    keychain: ""
-  };
 
-  componentDidMount() {
-    this.loadAccounts();
+class Account extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+      confirmPassword: '',
+      firstName: '',
+      lastName: '',
+      key: '',
+      formErrors: {password: '', confirmPassword: ''},     
+      passwordValid: false,
+      confirmPassword: false,
+      formValid: false
+    }
   }
 
-  loadAccounts = () => {
-    API.getAccounts()
-      .then(res =>
-        this.setState({ email:  "", password: "", verifyPassword: "", firstName: "", lastName: "", keychain: "" })
-      )
-      .catch(err => console.log(err));
-  };
+  handleUserInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({[name]: value},() => { this.validateField(name, value) });
+  }
 
-  deleteAccount = id => {
-    API.deleteAccount(id)
-      .then(res => this.loadAccounts())
-      .catch(err => console.log(err));
-  };
+  validateField(fieldName, value) {
+    let fieldValidationErrors = this.state.formErrors;    
+    let passwordValid = this.state.passwordValid;
+    let confirmPasswordValid = this.state.confirmPasswordValid;
 
-  // handleInputChange = event => {
-  //   const { name, value } = event.target;
-  //   this.setState({
-  //     [name]: value
-  //   });
-  // };
-
-  handleFormSubmit = event => {
-    event.preventDefault();
-    if (this.state.email && this.state.password) {
-      API.saveAccount({
-        email: this.state.email,
-        password: this.state.password,
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        keychain: this.state.keychain
-
-      })
-        .then(res => this.loadAccounts())
-        .catch(err => console.log(err));
+    switch(fieldName) {      
+      case 'password':
+        passwordValid = value.length >= 6;
+        fieldValidationErrors.password = passwordValid ? '': ' is too short';
+        break;
+      case 'confirmPassword':
+        confirmPasswordValid = passwordValid;
+        fieldValidationErrors.confirmPassword = confirmPasswordValid ? '': ' does not match';
+        break;
+      default:
+        break;
     }
-  };
+    this.setState({formErrors: fieldValidationErrors,                    
+                    passwordValid: passwordValid,  
+                    confirmPasswordValid: confirmPasswordValid
+                  }, this.validateForm);
+  }
 
-  render() {
+  validateForm() {
+    this.setState({formValid: this.state.passwordValid});
+  }
+
+  errorClass(error) {
+    return(error.length === 0 ? '' : 'has-error');
+  }
+
+  render () {
     return (
-      <Container fluid>
-        <Row>
-          <Col size="md-6">
-            <Jumbotron>
-              <h1>What Books Should I Read?</h1>
-            </Jumbotron>
-            <form>
-              <Input
-                value={this.state.title}
-                onChange={this.handleInputChange}
-                name="title"
-                placeholder="Title (required)"
-              />
-              <Input
-                value={this.state.author}
-                onChange={this.handleInputChange}
-                name="author"
-                placeholder="Author (required)"
-              />
-              <TextArea
-                value={this.state.synopsis}
-                onChange={this.handleInputChange}
-                name="synopsis"
-                placeholder="Synopsis (Optional)"
-              />
-              <FormBtn
-                disabled={!(this.state.author && this.state.title)}
-                onClick={this.handleFormSubmit}
-              >
-                Submit Book
-              </FormBtn>
-            </form>
-          </Col>
-          <Col size="md-6 sm-12">
-            <Jumbotron>
-              <h1>My Account</h1>
-            </Jumbotron>
-            {this.state.books.length ? (
-              <List>
-                {this.state.books.map(book => (
-                  <ListItem key={book._id}>
-                    <Link to={"/books/" + book._id}>
-                      <strong>
-                        {book.title} by {book.author}
-                      </strong>
-                    </Link>
-                    <DeleteBtn onClick={() => this.deleteBook(book._id)} />
-                  </ListItem>
-                ))}
-              </List>
-            ) : (
-              <h3>No Results to Display</h3>
-            )}
-          </Col>
-        </Row>
-      </Container>
-    );
+      <form className="accountForm">
+        <h2>Account</h2>
+        <div className="panel panel-default">
+          <FormErrors formErrors={this.state.formErrors} />
+        </div>
+        {/* <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
+          <label htmlFor="email">Email address</label>
+          <input type="email" className="form-control" name="email"
+            placeholder="Email"
+            value={this.state.email}
+            onChange={this.handleUserInput}  autoFocus/>
+        </div> */}
+        <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
+          <label htmlFor="password">Change Password</label>
+          <input type="password" className="form-control" name="password"
+            placeholder="Password" required
+            value={this.state.password}
+            onChange={this.handleUserInput}  autoFocus/>
+        </div>
+        <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input type="password" className="form-control" name="confirmPassword"
+            placeholder="Confirm Password" required
+            value={this.state.confirmPassword}
+            onChange={this.handleUserInput}  />
+        </div>
+        <div className={'form-group'}>
+          <label htmlFor="firstName">First Name</label>
+          <input type="text" className="form-control" name="firstName"
+            placeholder="First Name" required
+            value={this.state.firstName}
+            onChange={this.handleUserInput}  />
+        </div>
+        <div className={'form-group'}>
+          <label htmlFor="lastName">Last Name</label>
+          <input type="text" className="form-control" name="lastName"
+            placeholder="Last Name" required
+            value={this.state.lastName}
+            onChange={this.handleUserInput}  />
+        </div>
+        <div className={'form-group'}>
+          <label htmlFor="key">Keys</label>
+          <input type="text" className="form-control" name="key"
+            placeholder="Enter key"
+            value={this.state.key}
+            onChange={this.handleUserInput}  />
+        </div>
+        <button type="submit" className="btn btn-primary" disabled={!this.state.formValid}>Sign up</button>
+      </form>
+    )
   }
 }
 
-export default Accounts;
+export default Account;
