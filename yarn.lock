@@ -228,6 +228,11 @@ braces@^2.3.0, braces@^2.3.1:
     split-string "^3.0.2"
     to-regex "^3.0.1"
 
+breeze@0.4.x:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/breeze/-/breeze-0.4.0.tgz#de70bc3ab235a775f59e7d6ee97f4e9023140571"
+  integrity sha1-3nC8OrI1p3X1nn1u6X9OkCMUBXE=
+
 bson@^1.1.0, bson@~1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/bson/-/bson-1.1.0.tgz#bee57d1fb6a87713471af4e32bcae36de814b5b0"
@@ -565,6 +570,16 @@ dotenv@^6.2.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-6.2.0.tgz#941c0410535d942c8becf28d3f357dbd9d476064"
   integrity sha512-HygQCKUBSFl8wKQZBSemMywRWcEDNidvNbjGVyZu3nbZ8qq9ubiPoGLMdRDpfSrpkkm9BXYFkpKxxFX38o/76w==
 
+dragonfly@0.2.x:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/dragonfly/-/dragonfly-0.2.1.tgz#d2709d0a842c80147be733e209279e0bb5625717"
+  integrity sha1-0nCdCoQsgBR75zPiCSeeC7ViVxc=
+
+drip@0.3.x:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/drip/-/drip-0.3.1.tgz#a690a12c0ae2299046558f94cad1475d36746486"
+  integrity sha1-ppChLAriKZBGVY+UytFHXTZ0ZIY=
+
 duplexer3@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/duplexer3/-/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
@@ -740,6 +755,11 @@ fill-range@^4.0.0:
     is-number "^3.0.0"
     repeat-string "^1.6.1"
     to-regex-range "^2.1.0"
+
+filtr@0.3.x:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/filtr/-/filtr-0.3.0.tgz#957f8382e72a9efd97502150aa8cc6f488f9c62c"
+  integrity sha1-lX+Dgucqnv2XUCFQqozG9Ij5xiw=
 
 finalhandler@1.1.1:
   version "1.1.1"
@@ -1476,7 +1496,7 @@ mongodb-core@3.1.9:
   optionalDependencies:
     saslprep "^1.0.0"
 
-mongodb@3.1.10:
+mongodb@3.1.10, mongodb@^3.1.10:
   version "3.1.10"
   resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.1.10.tgz#45ad9b74ea376f4122d0881b75e5489b9e504ed7"
   integrity sha512-Uml42GeFxhTGQVml1XQ4cD0o/rp7J2ROy0fdYUcVitoE7vFqEhKH4TYVqRDpQr/bXtCJVxJdNQC1ntRxNREkPQ==
@@ -1683,6 +1703,11 @@ number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
+
+oath@0.2.x:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/oath/-/oath-0.2.3.tgz#cd44fc6124fcf9cb65aca60eba05c51f3da0019e"
+  integrity sha1-zUT8YST8+ctlrKYOugXFHz2gAZ4=
 
 object-assign@^4.1.0:
   version "4.1.1"
@@ -2095,6 +2120,19 @@ sax@^1.2.4:
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
   integrity sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
 
+seed@^0.4.4:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/seed/-/seed-0.4.4.tgz#750c371289d94527c6eb6541d85a8d81bd93d2f3"
+  integrity sha1-dQw3EonZRSfG62VB2FqNgb2T0vM=
+  dependencies:
+    breeze "0.4.x"
+    dragonfly "0.2.x"
+    drip "0.3.x"
+    filtr "0.3.x"
+    oath "0.2.x"
+    sol "0.3.x"
+    super "0.2.x"
+
 semver-diff@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/semver-diff/-/semver-diff-2.1.0.tgz#4bbb8437c8d37e4b0cf1a68fd726ec6d645d6d36"
@@ -2227,6 +2265,11 @@ snapdragon@^0.8.1:
     source-map "^0.5.6"
     source-map-resolve "^0.5.0"
     use "^3.1.0"
+
+sol@0.3.x:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/sol/-/sol-0.3.0.tgz#99ded0367e5d58b4c5bf4f873260a7a1ea8fd611"
+  integrity sha1-md7QNn5dWLTFv0+HMmCnoeqP1hE=
 
 source-map-resolve@^0.5.0:
   version "0.5.2"
@@ -2373,6 +2416,11 @@ strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
   integrity sha1-PFMZQukIwml8DsNEhYwobHygpgo=
+
+super@0.2.x:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/super/-/super-0.2.3.tgz#a6695c1dce00ff58432a63e8b9ce268932b42c61"
+  integrity sha1-pmlcHc4A/1hDKmPouc4miTK0LGE=
 
 supports-color@^4.5.0:
   version "4.5.0"
