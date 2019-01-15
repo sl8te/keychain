@@ -1,123 +1,81 @@
 import React, { Component } from "react";
-import DeleteBtn from "../components/DeleteBtn";
-import Jumbotron from "../components/Jumbotron";
-import API from "../utils/API";
-import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../components/Grid";
-import { List, ListItem } from "../components/List";
-import { Input, TextArea, FormBtn } from "../components/Form";
+import { FormErrors } from './FormErrors';
 
-class Signups extends Component {
-  state = {
-    email: "",
-    password: "",
-    verifyPassword: "",
-    firstName: "",
-    lastName: "",
-    Keychain: []
-  };
-
-  componentDidMount() {
-    this.loadSignups();
+class Signup extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+      formErrors: {email: '', password: ''},
+      emailValid: false,
+      passwordValid: false,
+      formValid: false
+    }
   }
 
-  loadSignups = () => {
-    API.getSignups()
-      .then(res =>
-        this.setState({ email: res.data, password: "", verifyPassword: "", firstName: "", lastName: "", Keychain: "" })
-      )
-      .catch(err => console.log(err));
-  };
+  handleUserInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({[name]: value},() => { this.validateField(name, value) });
+  }
 
-  deleteAccount = id => {
-    API.deleteAccount(id)
-      .then(res => this.loadSignups())
-      .catch(err => console.log(err));
-  };
+  validateField(fieldName, value) {
+    let fieldValidationErrors = this.state.formErrors;
+    let emailValid = this.state.emailValid;
+    let passwordValid = this.state.passwordValid;
 
-  // handleInputChange = event => {
-  //   const { name, value } = event.target;
-  //   this.setState({
-  //     [name]: value
-  //   });
-  // };
-
-  handleFormSubmit = event => {
-    event.preventDefault();
-    if (this.state.email && this.state.password) {
-      API.saveAccount({
-        email: this.state.email,
-        password: this.state.password,
-        verifyPassword: this.state.verifyPassword,
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        keychain: this.state.keychain
-      })
-        .then(res => this.loadSignups())
-        .catch(err => console.log(err));
+    switch(fieldName) {
+      case 'email':
+        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+        fieldValidationErrors.email = emailValid ? '' : ' is invalid';
+        break;
+      case 'password':
+        passwordValid = value.length >= 6;
+        fieldValidationErrors.password = passwordValid ? '': ' is too short';
+        break;
+      default:
+        break;
     }
-  };
+    this.setState({formErrors: fieldValidationErrors,
+                    emailValid: emailValid,
+                    passwordValid: passwordValid
+                  }, this.validateForm);
+  }
 
-  render() {
+  validateForm() {
+    this.setState({formValid: this.state.emailValid && this.state.passwordValid});
+  }
+
+  errorClass(error) {
+    return(error.length === 0 ? '' : 'has-error');
+  }
+
+  render () {
     return (
-      <Container fluid>
-        <Row>
-          <Col size="md-6">
-            <Jumbotron>
-              <h1>Keychain Account Signup</h1>
-            </Jumbotron>
-            <form>
-              <Input
-                value={this.state.title}
-                onChange={this.handleInputChange}
-                name="title"
-                placeholder="Title (required)"
-              />
-              <Input
-                value={this.state.author}
-                onChange={this.handleInputChange}
-                name="author"
-                placeholder="Author (required)"
-              />
-              <TextArea
-                value={this.state.synopsis}
-                onChange={this.handleInputChange}
-                name="synopsis"
-                placeholder="Synopsis (Optional)"
-              />
-              <FormBtn
-                disabled={!(this.state.author && this.state.title)}
-                onClick={this.handleFormSubmit}
-              >
-                Submit Book
-              </FormBtn>
-            </form>
-          </Col>
-          <Col size="md-6 sm-12">
-            <Jumbotron>
-              <h1>Keychain Signup</h1>
-            </Jumbotron>
-            {this.state.books.length ? (
-              <List>
-                {this.state.books.map(book => (
-                  <ListItem key={book._id}>
-                    <Link to={"/books/" + book._id}>
-                      <strong>
-                        {book.title} by {book.author}
-                      </strong>
-                    </Link>
-                    <DeleteBtn onClick={() => this.deleteBook(book._id)} />
-                  </ListItem>
-                ))}
-              </List>
-            ) : (
-              <h3>No Results to Display</h3>
-            )}
-          </Col>
-        </Row>
-      </Container>
-    );
+      <form className="signupForm">
+        <h2>Sign up</h2>
+        <div className="panel panel-default">
+          <FormErrors formErrors={this.state.formErrors} />
+        </div>
+        <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
+          <label htmlFor="email">Email address</label>
+          <input type="email" required className="form-control" name="email"
+            placeholder="Email"
+            value={this.state.email}
+            onChange={this.handleUserInput}  />
+        </div>
+        <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
+          <label htmlFor="password">Password</label>
+          <input type="password" className="form-control" name="password"
+            placeholder="Password"
+            value={this.state.password}
+            onChange={this.handleUserInput}  />
+        </div>
+        <button type="submit" className="btn btn-primary" disabled={!this.state.formValid}>Sign up</button>
+      </form>
+    )
   }
 }
 
-export default Signups;
+export default Signup;
