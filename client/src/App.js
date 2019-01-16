@@ -7,7 +7,7 @@ import Nav from "./components/Nav";
 // import Account from "./pages/account/Books";
 // import Friends from "./pages/friends/Books";
 // import Login from "./pages/login/Books";
-// import Signup from "./pages/login/Books";
+// import Signup from "./pages/signup/Signup";
 // import Search from "./pages/search/Books";
 
 function App() {

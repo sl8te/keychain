@@ -16,5 +16,11 @@ export default {
   // Saves a book to the database
   saveBook: function(bookData) {
     return axios.post("/api/books", bookData);
+  },
+  // ========================================
+  // here is where the api routes belong
+  createUser: function(userData) {
+    return axios.post("/api/users", userData);
   }
+  
 };

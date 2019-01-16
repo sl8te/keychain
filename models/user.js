@@ -6,21 +6,21 @@ const bcrypt = require("bcrypt-nodejs");
 const UserSchema = new Schema({
     firstName: { 
         type: String, 
-        required: true }
-        ,
+        required: true 
+    },
     lastName: { 
         type: String, 
-        required: true }
-        ,
+        required: true 
+    },
     email: { 
         type: String,
         // email requirement should be in the style of requiring it to look like an email 
-        required: true }
-        ,
+        required: true
+    },
     password: {
         type: String,
-        required: true }
-        ,
+        required: true 
+    },
     fullName: String,
     // keychains should link back to keychains
     keychains: [
@@ -48,9 +48,14 @@ UserSchema.methods.validPassword = function(password) {
   };
 
 // use this to hash the password before the user account is created
-UserSchema.pre('save', function(user) {
+UserSchema.pre('save', function(next) {
+    let user = this;
     // use language from the libary for salting the password
     user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
+    // console.log(user.password);
+    console.log(user);
+    // return user.password;
+    next();
     });
 
 const User = mongoose.model("User", UserSchema);
