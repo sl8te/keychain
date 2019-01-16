@@ -15,7 +15,7 @@ class Signup extends Component {
       formErrors: {email: '', password: '', confirmPassword: ''},
       emailValid: false,
       passwordValid: false,
-      confirmPassword: false,
+      confirmPasswordValid: false,
       formValid: false
     }
   }
@@ -40,10 +40,20 @@ class Signup extends Component {
       case 'password':
         passwordValid = value.length >= 6;
         fieldValidationErrors.password = passwordValid ? '': ' is too short';
+        console.log(passwordValid);
         break;
       case 'confirmPassword':
-        confirmPasswordValid = passwordValid;
-        fieldValidationErrors.confirmPassword = confirmPasswordValid ? '': ' does not match';
+        //confirmPasswordValid = '';
+        // fieldValidationErrors.confirmPassword = (confirmPasswordValid === passwordValid) ? '': ' does not match';
+        if(this.state.confirmPassword === this.state.password){
+          confirmPasswordValid = true;
+          fieldValidationErrors.confirmPassword = "";
+        }
+        else{
+          confirmPasswordValid = false;
+          fieldValidationErrors.confirmPassword = " does not match!";
+        }
+        console.log(confirmPasswordValid);
         break;
       default:
         break;
@@ -56,7 +66,7 @@ class Signup extends Component {
   }
 
   validateForm() {
-    this.setState({formValid: this.state.emailValid && this.state.passwordValid});
+    this.setState({formValid: this.state.emailValid && this.state.passwordValid && this.state.confirmPassword});
   }
 
   errorClass(error) {
