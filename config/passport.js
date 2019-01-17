@@ -5,14 +5,11 @@ const db = require("../models");
 passport.use(new LocalStrategy(
 	// usernameField is based on what we called the username in the model
 	{
-		emailField: "email"
+		usernameField: "email"
 	},
 	function(email, password, done){
-		db.User.findOne({
-			where: {
-				email: email,
-			}
-		}).then(function(dbUser){
+		db.User.findOne({ email: email })
+		.then(function(dbUser){
 			if(!dbUser){
 				return done(null, false, { message: "User does not exist"});
 			} else if(!dbUser.validPassword(password)){

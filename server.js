@@ -25,7 +25,7 @@ app.use(passport.session());
 app.use(routes);
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/keychain", { useNewUrlParser: true });
 
 // Start the API server
 app.listen(PORT, function() {

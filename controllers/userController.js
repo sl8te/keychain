@@ -6,7 +6,7 @@ module.exports = {
     // but good for testing the user creation process
     findAll: function(req, res) {
         db.User
-            .find()
+            .find({ $or:[{ firstName: req.body },{ lastName: req.body }]})
             .then(dbUser => res.json(dbUser))
             .catch(err => res.status(422).json(err));
     },
@@ -19,6 +19,7 @@ module.exports = {
     },
     // for creating a user, the req.body should have first name, last name, email and password
     createUser: function(req, res) {
+        console.log(req.body);
         db.User
             .create(req.body)
             .then(dbUser => res.json(dbUser))

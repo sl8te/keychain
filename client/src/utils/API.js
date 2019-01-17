@@ -21,6 +21,9 @@ export default {
   // here is where the api routes belong
   createUser: function(userData) {
     return axios.post("/api/users", userData);
+  },
+  loginUser: function(loginUser) {
+    return axios.post("api/login", loginUser);
   }
   
 };

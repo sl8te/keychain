@@ -7,6 +7,10 @@ var Schema = mongoose.Schema;
 // This is similar to a Sequelize model
 var KeychainSchema = new Schema({
   // `title` must be of type String
+  account:{
+    type: String,
+    required: true
+  },
   username: {
     type: String, 
     required: true
