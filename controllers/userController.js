@@ -13,7 +13,7 @@ module.exports = {
     // for finding an indivdual user in a search
     findOneUser: function(req, res) {
         db.User
-            .findOne(req.params)
+            .findOne(req.params.id)
             .then(dbUser => res.json(dbUser))
             .catch(err => res.status(422).json(err));
     },

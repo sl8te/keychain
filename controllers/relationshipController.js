@@ -29,29 +29,32 @@ module.exports = {
             // .find(req.body)
             // testing in production
             .find({ status: 1 , $or:[{ userOneId: req.body._id },{ userTwoId: req.body._id }]})
+            // If we're able to successfully pull some relationships, let's start the recursion process to retrieve our friends
             .populate("userOneId")
             .populate("userTwoId")
-            // If we're able to successfully pull some relationships, let's start the recursion process to retrieve our friends
             .then(dbRelationship => {
+                console.log(dbRelationship);
                 // defining an empty array to put opposite user id in
-                return 
                 var friendList = [];
                 // set up a counter to start at 0
                 var i = 0;
-                console.log(friendList, i);
+                pushToFriendsList();
                 // // if i is less than dbRelationship.length, continue the function
                 function pushToFriendsList(){
                     if (i < dbRelationship.length) {
+                        console.log("running length");
                         // we want to capture the user that isn't the one querying the list
-                        if (dbRelationship[i].userOneId === req.body._id) {
+                        if (dbRelationship[i].userOneId._id == req.body._id) {
                             // first we push the opposite id of the request user to friendsList
+                            // console.log("running push");
                             friendList.push(dbRelationship[i].userTwoId);
                             // then increase i by one
                             i++;
                             console.log(i);
                             // then we call the function again
                             pushToFriendsList();
-                        } else if (dbRelationship[i].userTwoId === req.body._id){
+                        } else if (dbRelationship[i].userTwoId._id == req.body._id){
+                            // console.log("running else push");
                             // push opposite id of the request user to friendsList
                             friendList.push(dbRelationship[i].userOneId);
                             // increase i by one
@@ -59,23 +62,14 @@ module.exports = {
                             console.log(i);
                             // call the function again
                             pushToFriendsList();
-                        } 
+                        }   else {
+                            return;
+                        }
                     } else {
-                        // console.log(friendList);
-                        // res.json(friendList);
+                        return res.json(friendList);
                     }
                 }
-                // first instance of this function calling itself
-                pushToFriendsList();
             })
-                // let friendslist  
-                // res.json(dbRelationship))
-            .then(friendList => res.json(friendList))
-            // since I have access to all of the models I would like to then check in the Users table for the friend
-            // I want to set up a recursive statement to find each friend in the json list after I get all of the results back
-            // This statement should be the length of dbRelationship, then have find statement
-            // for each user that isn't the logged in user, since userOneId or UserTwoId can be the current user
-            // we will want an if statement and an else if statement, the else statement will stop the function
             .catch(err => res.status(422).json(err));
     },
     // for creating a Relationship, the req.body should have first name, last name, email and password
