@@ -1,0 +1,15 @@
+.navbar{
+    background: #92f442;
+}
+
+.navbar-brand{
+    color: darkgreen;
+}
+
+.jumbotron{
+    background: gray;
+}
+
+.form-control:focus{
+    border-color: darkgreen;
+}
