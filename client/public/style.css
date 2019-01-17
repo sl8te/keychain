@@ -10,6 +10,27 @@
     background: gray;
 }
 
-.form-control:focus{
+.form-control{
     border-color: darkgreen;
+    box-shadow: #92f442;
+}
+
+.form-control:focus{
+  border-color: #92f442;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(6, 235, 63, 0.6);
+}
+
+.btn{
+    background: #92f442;
+    color: #000;
+}
+
+.deleteBTN{
+    background: red;
+}
+
+.deleteBTN:hover{
+    background: darkred;
+    color: white;
+    border-style: double;
 }

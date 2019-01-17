@@ -101,11 +101,11 @@ class Account extends Component {
             value={this.state.lastName}
             onChange={this.handleUserInput}  />
         </div>        
-        <button type="submit" className="btn btn-primary" disabled={!this.state.formValid}>Submit Changes</button>
+        <button type="submit" className="btn" disabled={!this.state.formValid}>Submit Changes</button>
         <br/>
         <br/>
         {/* <button type="submit" className="btn btn-danger" >Delete Account</button> */}
-        <button className="btn btn-danger" onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) this.deleteItem(e) } }>
+        <button className="deleteBTN" onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) this.deleteItem(e) } }>
               Delete Account</button>
       </form>
     )
