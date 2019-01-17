@@ -6,6 +6,8 @@ const userController = require("../../controllers/userController");
 router
   .route("/:id")
   .get(userController.findOneUser)
+  .put(userController.editUser)
+  .delete(userController.deleteUser)
   // .route("/:id")
   // .get(isAuthenticated, userController.findOneUser)
 

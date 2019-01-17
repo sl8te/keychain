@@ -15,4 +15,8 @@ router
     .put(relationshipController.acceptFriend)
     .delete(relationshipController.denyRequest)
 
+router
+    .route("/requests/:id")
+    .get(relationshipController.checkFriendStatus)
+    
   module.exports = router;
