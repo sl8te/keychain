@@ -113,7 +113,7 @@ class Signup extends Component {
             value={this.state.lastName}
             onChange={this.handleUserInput}  />
         </div>        
-        <button type="submit" className="btn btn-primary" disabled={!this.state.formValid}>Sign up</button>
+        <button type="submit" className="btn" disabled={!this.state.formValid}>Sign up</button>
       </form>
     )
   }
