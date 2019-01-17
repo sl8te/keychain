@@ -25,8 +25,8 @@ export default {
   findOneUser: function(id) {
     return axios.post("/api/users/" + id);
   },
-  editUser: function(id) {
-    return axios.put("/api/users/" + id);
+  editUser: function(id, editRes) {
+    return axios.put("/api/users/" + id, editRes);
   },
   deleteUser: function(id) {
     return axios.delete("/api/users/" + id);
