@@ -104,7 +104,9 @@ class Account extends Component {
         <button type="submit" className="btn btn-primary" disabled={!this.state.formValid}>Submit Changes</button>
         <br/>
         <br/>
-        <button type="submit" className="btn btn-danger" disabled={!this.state.formValid}>Delete Account</button>
+        {/* <button type="submit" className="btn btn-danger" >Delete Account</button> */}
+        <button className="btn btn-danger" onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) this.deleteItem(e) } }>
+              Delete Account</button>
       </form>
     )
   }
