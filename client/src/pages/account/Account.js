@@ -35,9 +35,7 @@ class Account extends Component {
         passwordValid = value.length >= 6;
         fieldValidationErrors.password = passwordValid ? '': ' is too short';
         break;
-        case 'confirmPassword':
-        //confirmPasswordValid = '';
-        // fieldValidationErrors.confirmPassword = (confirmPasswordValid === passwordValid) ? '': ' does not match';
+        case 'confirmPassword':        
         if(this.state.confirmPassword === this.state.password){
           confirmPasswordValid = true;
           fieldValidationErrors.confirmPassword = "";
