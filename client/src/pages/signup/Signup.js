@@ -42,9 +42,7 @@ class Signup extends Component {
         fieldValidationErrors.password = passwordValid ? '': ' is too short';
         console.log(passwordValid);
         break;
-      case 'confirmPassword':
-        //confirmPasswordValid = '';
-        // fieldValidationErrors.confirmPassword = (confirmPasswordValid === passwordValid) ? '': ' does not match';
+      case 'confirmPassword':       
         if(this.state.confirmPassword === this.state.password){
           confirmPasswordValid = true;
           fieldValidationErrors.confirmPassword = "";
@@ -64,7 +62,7 @@ class Signup extends Component {
                     confirmPasswordValid: confirmPasswordValid
                   }, this.validateForm);
   }
-
+  
   validateForm() {
     this.setState({formValid: this.state.emailValid && this.state.passwordValid && this.state.confirmPassword});
   }

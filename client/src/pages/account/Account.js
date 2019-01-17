@@ -14,7 +14,7 @@ class Account extends Component {
       key: '',
       formErrors: {password: '', confirmPassword: ''},     
       passwordValid: false,
-      confirmPassword: false,
+      confirmPasswordValid: false,
       formValid: false
     }
   }
@@ -35,9 +35,18 @@ class Account extends Component {
         passwordValid = value.length >= 6;
         fieldValidationErrors.password = passwordValid ? '': ' is too short';
         break;
-      case 'confirmPassword':
-        confirmPasswordValid = passwordValid;
-        fieldValidationErrors.confirmPassword = confirmPasswordValid ? '': ' does not match';
+        case 'confirmPassword':
+        //confirmPasswordValid = '';
+        // fieldValidationErrors.confirmPassword = (confirmPasswordValid === passwordValid) ? '': ' does not match';
+        if(this.state.confirmPassword === this.state.password){
+          confirmPasswordValid = true;
+          fieldValidationErrors.confirmPassword = "";
+        }
+        else{
+          confirmPasswordValid = false;
+          fieldValidationErrors.confirmPassword = " does not match!";
+        }
+        console.log(confirmPasswordValid);
         break;
       default:
         break;
@@ -49,7 +58,7 @@ class Account extends Component {
   }
 
   validateForm() {
-    this.setState({formValid: this.state.passwordValid});
+    this.setState({formValid: this.state.passwordValid && this.state.confirmPassword});
   }
 
   errorClass(error) {
@@ -59,17 +68,13 @@ class Account extends Component {
   render () {
     return (
       <form className="accountForm">
-        <h2>Account</h2>
+        <h2>Account Details</h2>
         <div className="panel panel-default">
           <FormErrors formErrors={this.state.formErrors} />
         </div>
-        {/* <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
-          <label htmlFor="email">Email address</label>
-          <input type="email" className="form-control" name="email"
-            placeholder="Email"
-            value={this.state.email}
-            onChange={this.handleUserInput}  autoFocus/>
-        </div> */}
+        <div>
+          <h3>Hello thing@thing.com</h3>         
+        </div>       
         <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
           <label htmlFor="password">Change Password</label>
           <input type="password" className="form-control" name="password"
@@ -87,14 +92,14 @@ class Account extends Component {
         <div className={'form-group'}>
           <label htmlFor="firstName">First Name</label>
           <input type="text" className="form-control" name="firstName"
-            placeholder="First Name" required
+            placeholder="First Name"
             value={this.state.firstName}
             onChange={this.handleUserInput}  />
         </div>
         <div className={'form-group'}>
           <label htmlFor="lastName">Last Name</label>
           <input type="text" className="form-control" name="lastName"
-            placeholder="Last Name" required
+            placeholder="Last Name"
             value={this.state.lastName}
             onChange={this.handleUserInput}  />
         </div>
@@ -105,7 +110,7 @@ class Account extends Component {
             value={this.state.key}
             onChange={this.handleUserInput}  />
         </div>
-        <button type="submit" className="btn btn-primary" disabled={!this.state.formValid}>Sign up</button>
+        <button type="submit" className="btn btn-primary" disabled={!this.state.formValid}>Submit Changes</button>
       </form>
     )
   }
