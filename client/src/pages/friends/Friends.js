@@ -1,4 +1,4 @@
-//import components for the friends list
+import components for the friends list
 import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
@@ -31,7 +31,8 @@ deleteFriendList = id => {
   };
 
 
-render(){
+render();
+{
     return (
     <Container>
         <Row>
@@ -57,4 +58,4 @@ function Thumbnail({src}){
         
     )
 }
-export function FriendsList();
+// export function FriendsList();
