@@ -6,6 +6,7 @@ import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
 import Signup from "./pages/signup/Signup";
 import Account from "./pages/account/Account";
+import isAuthenticated from "../../config/middleware/isAuthenticated";
 
 function App() {
   return (
