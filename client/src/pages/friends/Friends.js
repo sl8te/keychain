@@ -17,8 +17,21 @@ loadFriends=()=> {
     API.getFriends().then(res => this.setState({friends: res.data, fullName: "", keychain: "", thumbnail: ""})
     ) .catch(err => console.log(err));
 };
+deleteFriendList = id => {
+    API.deleteFriendList(id)
+      .then(res => this.FriendsList())
+      .catch(err => console.log(err));
+  };
 
-render() {
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+
+
+render(){
     return (
     <Container>
         <Row>
