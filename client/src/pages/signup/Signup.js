@@ -37,9 +37,9 @@ class Signup extends Component {
         emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
         fieldValidationErrors.email = emailValid ? '' : ' is invalid';
         break;
-      case 'password':
-        passwordValid = value.length >= 6;
-        fieldValidationErrors.password = passwordValid ? '': ' is too short';
+      case 'password':        
+        passwordValid = value.match(/^[A-Z]{1}[A-Za-z0-9]{5,10}$/);
+        fieldValidationErrors.password = passwordValid ? '': ' does not match';
         console.log(passwordValid);
         break;
       case 'confirmPassword':       
@@ -86,14 +86,14 @@ class Signup extends Component {
             onChange={this.handleUserInput}  autoFocus/>
         </div>
         <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Password must contain at least 1 uppercase letter and be 6 to 10 characters long.</label>          
           <input type="password" className="form-control" name="password"
             placeholder="Password" required
             value={this.state.password}
             onChange={this.handleUserInput}  />
         </div>
         <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
-          <label htmlFor="confirmPassword">Confirm Password</label>
+          <label htmlFor="confirmPassword">Confirm Password</label>          
           <input type="password" className="form-control" name="confirmPassword"
             placeholder="Confirm Password" required
             value={this.state.confirmPassword}
@@ -112,14 +112,7 @@ class Signup extends Component {
             placeholder="Last Name" required
             value={this.state.lastName}
             onChange={this.handleUserInput}  />
-        </div>
-        <div className={'form-group'}>
-          <label htmlFor="key">Keys</label>
-          <input type="text" className="form-control" name="key"
-            placeholder="Enter key (not required)"
-            value={this.state.key}
-            onChange={this.handleUserInput}  />
-        </div>
+        </div>        
         <button type="submit" className="btn btn-primary" disabled={!this.state.formValid}>Sign up</button>
       </form>
     )
