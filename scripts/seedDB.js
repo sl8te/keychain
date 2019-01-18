@@ -1,12 +1,21 @@
 const mongoose = require("mongoose");
 const db = require("../models");
 
+// mongoose.set('useNewUrlParser', true)
+// mongoose.set('useFindAndModify', true)
+// mongoose.set('useCreateIndex', true)
+
+// conn = mongoose.createConnection(dbUrl)
+mongoose.connect("mongodb://localhost:27017/Book", { useNewUrlParser: true });
+
 // This file empties the Books collection and inserts the books below
 
-mongoose.connect(
-  process.env.MONGODB_URI ||
-  "mongodb://localhost/reactreadinglist"
-);
+
+  // MongoClient.connect("mongodb://localhost:27017", { useNewUrlParser: true });
+
+  // process.env.MONGODB_URI ||
+  // "mongodb://localhost/reactreadinglist"
+
 
 const bookSeed = [
   {
