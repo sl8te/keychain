@@ -21,7 +21,10 @@ const UserSchema = new Schema({
         type: String,
         required: true 
     },
-    fullName: String,
+    photoLink: String,
+    isLoggedIn: {
+        type: Boolean,
+    },
     // keychains should link back to keychains
     keychains: [
         {
@@ -32,15 +35,6 @@ const UserSchema = new Schema({
         }
     ]
   });
-
-// Custom method `setFullName`
-UserSchema.methods.setFullName = function() {
-    // Set the current user's `fullName` to their `firstName` and their `lastName` together
-    this.fullName = this.firstName + " " + this.lastName;
-    // Return the new `fullName`
-    return this.fullName;
-  };
-
 
 // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
 UserSchema.methods.validPassword = function(password) {

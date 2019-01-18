@@ -36,7 +36,7 @@ export default {
   createUser: function(userData) {
     return axios.post("/api/users", userData);
   },
-  createUser: function(userData) {
+  findAllUsers: function(userData) {
     return axios.get("/api/users", userData);
   },
   // =======================================
