@@ -19,17 +19,17 @@ class Keys extends Component {
                     <h2>Your Keys</h2>
                     <br></br>
                     <div className="row">
-                    <div className= "key-wrapper">
-                        <div className="col-sm-8" id="key-list">
-                            <p id="platform_name">Platform/App</p>
-                            <p id="platform_username">Username</p>
-                            <p id="platform_profile_link">Profile link</p>
+                        <div className= "key-wrapper">
+                            <div className="col-sm-8" id="key-list">
+                                <p id="platform_name">Platform/App</p>
+                                <p id="platform_username">Username</p>
+                                <p id="platform_profile_link">Profile link</p>
+                            </div>
+                            <div className="col-sm-4" id="btn-wrapper">
+                                <button type="button" class="btn btn-success" id="edit-btn">Edit</button> 
+                                <button type="button" class="btn btn-danger" id="delete-btn">X</button> 
+                            </div>
                         </div>
-                        <div className="col-sm-4" id="btn-wrapper">
-                            <button type="button" class="btn btn-success" id="edit-btn">Edit</button> 
-                            <button type="button" class="btn btn-danger" id="delete-btn">X</button> 
-                        </div>
-                    </div>
                     </div>
                     <br></br>
                     <h3>Add A Key</h3>
