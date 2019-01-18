@@ -7,7 +7,7 @@ const relationshipRoutes = require("./relationship");
 const keychainRoutes = require("./keychain");
 
 // Book routes
-// router.use("/books", bookRoutes);
+router.use("/books", bookRoutes);
 // User routes
 router.use("/users", userRoutes);
 // Login route
