@@ -34,3 +34,64 @@
     color: white;
     border-style: double;
 }
+
+/* Specific Styling for Keys Page */
+/* ================================= */
+    /* top section: key list */
+
+h2 {
+    text-align: center;
+}
+
+.key-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    margin-left: 20px;
+}
+
+#platform_username {
+    margin-left: 20px;
+    margin-top: -10px;
+}
+
+#platform_profile_link {
+    margin-left: 20px;
+    margin-top: -10px;
+}
+#btn-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 5px;
+    margin-right: 10px;
+    margin-left: 100px;
+}
+#edit-btn {
+    margin-right: 10px;
+}
+#delete-btn{
+    background-color: red;
+}
+
+
+/* bottom section: add a key */
+
+h3 {
+    text-align: center;
+}
+#add-key {
+    margin-left: 2px;
+    margin-right: 2px;
+}
+.col-sm-3 {
+    display: flex;
+    justify-content: flex-end;
+}
+#submit-btn {
+    background-color: #3872d1;
+    color: white;
+    border-color: #3872d1;
+}
+/* =================================== */
