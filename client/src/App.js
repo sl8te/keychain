@@ -21,6 +21,7 @@ function App() {
           <Route exact path="/account" component={Account} />
           <Route exact path="/login" component={Login} />
           <Route component={NoMatch} />
+          {/* <Route exact path="/friends" component={Friends} /> */}
           {/* <Route exact path="/account" component={Account} />
           <Route exact path="/friends" component={Friends} />
           <Route exact path="/login" component={Login} />
