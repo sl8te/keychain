@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Redirect} from "react-router-dom";
 
 class Home extends Component {
     constructor (props) {
@@ -18,11 +19,13 @@ class Home extends Component {
           <br/>
           
           <p>Login to your account</p>
-          <button type="submit" className="btnHome">Login</button>
+          <a href="/login">
+          <button type="submit"className="btnHome">Login</button></a>
           <br/>
           <br/>
           <p>Signup for an account today!</p>
-          <button type="submit" className="btnHome">Signup</button>
+          <a href="/signup">
+          <button type="submit" className="btnHome">Signup</button></a>          
         </div>
       )
     }
