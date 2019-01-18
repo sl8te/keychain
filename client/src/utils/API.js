@@ -22,8 +22,8 @@ export default {
 
   // ========================================
   // where the user requests belong
-  findOneUser: function(id) {
-    return axios.post("/api/users/" + id);
+  findOneUser: function() {
+    return axios.get("/api/users/me");
   },
   editUser: function(id, editRes) {
     return axios.put("/api/users/" + id, editRes);

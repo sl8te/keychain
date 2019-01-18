@@ -1,21 +1,41 @@
 import React, { Component } from "react";
+import API from "../../utils/API";
+import { Redirect } from "react-router-dom";
 
 class Login extends Component {
     constructor (props) {
       super(props);
+      
       this.state = {
         email: '',
-        password: '',        
+        password: '',
+        user: ''
       }
     }
   
     handleUserInput = (e) => {
       const name = e.target.name;
       const value = e.target.value;
-      this.setState({[name]: value},() => { this.validateField(name, value) });
-    }  
+
+      this.setState({
+        [name]: value
+      });
+    };  
+
+    handleFormSubmit = event => {
+      event.preventDefault();
+      console.log("something");
+      API.loginUser(this.state)
+        .then((user) => {
+          this.setState({user:user.data});
+        })
+        
+    }
   
     render () {
+      if (this.state.user) {
+        return <Redirect to="/authenticate" user={this.state.user} />
+      } else {
       return (
         <form className="loginForm">
           <h2>Login</h2>          
@@ -35,9 +55,10 @@ class Login extends Component {
           </div>
           <br/>
           <br/>
-          <button type="submit" className="btn">Login</button>
+          <button type="button" className="btn" onClick={this.handleFormSubmit}>Login</button>
         </form>
-      )
+        )
+      }
     }
   }
   

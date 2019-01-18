@@ -1,30 +1,40 @@
-import React from 'react';
-import { withRouter } from 'react-router';
+import React, { Component } from "react";
+import API from "../../utils/API";
 
-export default function requireAuth(Component) {
+class Authenticate extends Component {
+  // Setting the component's initial state
+  state = {
+    firstName: "",
+    lastName: "",
+    password: ""
+  };
 
-  class AuthenticatedComponent extends React.Component {
-
-    componentWillMount() {
+  componentDidMount() {
       this.checkAuth();
-    }
-
-    checkAuth() {
-      if ( ! this.props.isLoggedIn) {
-        const location = this.props.location;
-        const redirect = location.pathname + location.search;
-
-        this.props.router.push(`/login?redirect=${redirect}`);
-      }
-    }
-
-    render() {
-      return this.props.isLoggedIn
-        ? <Component { ...this.props } />
-        : null;
-    }
-
   }
 
-  return withRouter(AuthenticatedComponent);
+  checkAuth = () => {
+    API.findOneUser().then(dbUser => {
+      console.log(dbUser);
+      if(dbUser.data.firstName){
+        this.setState(dbUser.data);
+      }
+    })
+  }
+
+  render() {
+    // Notice how each input has a `value`, `name`, and `onChange` prop
+    if(this.state.firstName){
+        return (
+            <h1>Hello {this.state.firstName}</h1>
+          );
+    }
+    else{
+        return(
+            <h1>Please go to login screen</h1>
+        )
+    }
+  }
 }
+
+export default Authenticate;
