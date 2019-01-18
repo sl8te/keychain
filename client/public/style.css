@@ -34,3 +34,17 @@
     color: white;
     border-style: double;
 }
+
+.home{
+    text-align: center;
+   
+}
+
+.btnHome{
+    background: #92f442;
+    color: #000;
+}
+.btnHome:hover{
+    background: darkgreen;
+    color: white;
+}
