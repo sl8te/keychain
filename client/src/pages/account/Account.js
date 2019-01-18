@@ -70,37 +70,36 @@ class Account extends Component {
         <div className="panel panel-default">
           <FormErrors formErrors={this.state.formErrors} />
         </div>
-        <div>
-          <h3>Hello thing@thing.com</h3>         
+        <div className="col-md-8">              
+          <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
+            <label htmlFor="password">Change Password (must contain at least 1 uppercase letter and be 6 to 10 characters long)</label>          
+            <input type="password" className="form-control" name="password"
+              placeholder="Password" required
+              value={this.state.password}
+              onChange={this.handleUserInput}  autoFocus/>
+          </div>
+          <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
+            <label htmlFor="confirmPassword">Confirm Password</label>
+            <input type="password" className="form-control" name="confirmPassword"
+              placeholder="Confirm Password" required
+              value={this.state.confirmPassword}
+              onChange={this.handleUserInput}  />
+          </div>
+          <div className={'form-group'}>
+            <label htmlFor="firstName">First Name</label>
+            <input type="text" className="form-control" name="firstName"
+              placeholder="First Name"
+              value={this.state.firstName}
+              onChange={this.handleUserInput}  />
+          </div>
+          <div className={'form-group'}>
+            <label htmlFor="lastName">Last Name</label>
+            <input type="text" className="form-control" name="lastName"
+              placeholder="Last Name"
+              value={this.state.lastName}
+              onChange={this.handleUserInput}  />
+          </div> 
         </div>       
-        <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
-        <label htmlFor="password">Change Password (must contain at least 1 uppercase letter and be 6 to 10 characters long)</label>          
-          <input type="password" className="form-control" name="password"
-            placeholder="Password" required
-            value={this.state.password}
-            onChange={this.handleUserInput}  autoFocus/>
-        </div>
-        <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <input type="password" className="form-control" name="confirmPassword"
-            placeholder="Confirm Password" required
-            value={this.state.confirmPassword}
-            onChange={this.handleUserInput}  />
-        </div>
-        <div className={'form-group'}>
-          <label htmlFor="firstName">First Name</label>
-          <input type="text" className="form-control" name="firstName"
-            placeholder="First Name"
-            value={this.state.firstName}
-            onChange={this.handleUserInput}  />
-        </div>
-        <div className={'form-group'}>
-          <label htmlFor="lastName">Last Name</label>
-          <input type="text" className="form-control" name="lastName"
-            placeholder="Last Name"
-            value={this.state.lastName}
-            onChange={this.handleUserInput}  />
-        </div>        
         <button type="submit" className="btn" disabled={!this.state.formValid}>Submit Changes</button>
         <br/>
         <br/>
