@@ -17,11 +17,7 @@ class Authenticate extends Component {
       // this.checkAuth to call command at the correct time
       this.checkAuth();
       this.loadFriends();
-      API.findAllRequests()
-      .then(res => console.log(res.data));
-      API.findAllFriends()
-      .then(results => console.log(results.data));
-      // this.loadRequests();
+      this.loadRequests();
   }
 
   loadFriends = () => {
@@ -29,6 +25,13 @@ class Authenticate extends Component {
       .then(res => this.setState({ friends: res.data }))
       .catch(err => console.log(err));
   }
+
+  loadRequests = () => {
+    API.findAllRequests()
+      // need to preserve all of the data, but only need to show on screen the OTHER user
+      .then(res => console.log(res.data));
+  }
+  
   // defining check auth
   checkAuth = () => {
     // api call to find the user using our cookie information

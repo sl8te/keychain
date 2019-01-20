@@ -12,7 +12,51 @@ module.exports = {
             .populate("userOneId")
             .populate("userTwoId")
             // because we need to interact with the relationship table, we'll need to set up the recursive statement on the front end
-            .then(dbRelationship => res.json(dbRelationship))
+            // .then(dbRelationship => res.json(dbRelationship))
+            .then(dbRelationship => {
+                console.log(dbRelationship);
+                // defining an empty array to put opposite user id in
+                var friendList = [];
+                // set up a counter to start at 0
+                var i = 0;
+                pushToFriendsList();
+                // // if i is less than dbRelationship.length, continue the function
+                function pushToFriendsList(){
+                    if (i < dbRelationship.length) {
+                        console.log("running length");
+                        // we want to capture the user that isn't the one querying the list
+                        if (dbRelationship[i].userOneId._id == req.user._id) {
+                            // first we push the opposite id of the request user to friendsList
+                            var relId = {
+                                _id: dbRelationship[i]._id,
+                                userTwoId: dbRelationship[i].userTwoId
+                            };
+                            friendList.push(relId);
+                            // then increase i by one
+                            i++;
+                            console.log(i);
+                            // then we call the function again
+                            pushToFriendsList();
+                        } else if (dbRelationship[i].userTwoId._id == req.user._id){
+                            // push opposite id of the request user to friendsList
+                            // increase i by one
+                            var relId = {
+                                _id: dbRelationship[i]._id,
+                                userOneId: dbRelationship[i].userOneId
+                            };
+                            friendList.push(relId);
+                            i++;
+                            console.log(i);
+                            // call the function again
+                            pushToFriendsList();
+                        }   else {
+                            return;
+                        }
+                    } else {
+                        return res.json(friendList);
+                    }
+                }
+            })
             .catch(err => res.status(422).json(err));
     },
     checkFriendStatus: function(req, res) {
@@ -86,7 +130,7 @@ module.exports = {
     acceptFriend: function(req, res) {
         console.log(req.body);
         db.Relationship
-            .findOneAndUpdate({ _id:req.params.id },{ status: 1 }, { new: true})
+            .findOneAndUpdate({ _id:req.params.id },{ status: 1 }, { new: true })
             .then(dbRelationship => res.json(dbRelationship))
             .catch(err => res.status(422).json(err));
     },
