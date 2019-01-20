@@ -85,11 +85,6 @@ export default {
     // req.user, but show all requests recieved
     return axios.get("api/relationships/recieved/:id" + id);
   },
-  // relationship id routes
-  findAllRequests: function(id) {
-    // same as 
-    return axios.get("api/relationships/" + id);
-  },
   checkFriendStatus: function(id, friendId) {
     return axios.get("api/relationships/requests/" + id, friendId);
   },

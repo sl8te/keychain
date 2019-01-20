@@ -30,14 +30,14 @@ class Authenticate extends Component {
   loadSent = () => {
     API.findAllSentRequests()
       // need to preserve all of the data, but only need to show on screen the OTHER user
-      .then(res => console.log(res.data))
+      .then(res => this.setState({ sent: res.data }))
       .catch(err => console.log(err));
   }
 
   loadRecieved = () => {
     API.findAllRecievedRequests()
       // need to preserve all of the data, but only need to show on screen the OTHER user
-      .then(res => console.log(res.data))
+      .then(res => this.setState({ recieved: res.data }))
       .catch(err => console.log(err));
   }
   
@@ -68,6 +68,7 @@ class Authenticate extends Component {
           <Container fluid>
             <h1>Hello {this.state.firstName}</h1>
             <Col size="md-12">
+              <h2>Friends List</h2>
               {this.state.friends.length ? (
                 <List>
                   {this.state.friends.map(friend => (
@@ -82,21 +83,38 @@ class Authenticate extends Component {
                 <h3>No friends to Display</h3>
               )}
             </Col>
-            {/* <Col size="md-12">
-              {this.state.requests.length ? (
+            <Col size="md-12">
+              <h2>Sent friend Requests</h2>
+              {this.state.sent.length ? (
                 <List>
-                  {this.state.requests.map(request => (
-                    <ListItem key={request._id}>
+                  {this.state.sent.map(friend => (
+                    <ListItem key={friend._id}>
                       <strong>
-                        {request}
+                        {friend.userTwoId.firstName} {friend.userTwoId.lastName}
                       </strong>
                     </ListItem>
                   ))}
                 </List>
               ) : (
-                <h3>No requests to Display</h3>
+                <h3>No Sent Requests at this moment in time</h3>
               )}
-            </Col> */}
+            </Col>
+            <Col size="md-12">
+              <h2>recieved friend Requests</h2>
+              {this.state.recieved.length ? (
+                <List>
+                  {this.state.recieved.map(friend => (
+                    <ListItem key={friend._id}>
+                      <strong>
+                        {friend.userOneId.firstName} {friend.userOneId.lastName}
+                      </strong>
+                    </ListItem>
+                  ))}
+                </List>
+              ) : (
+                <h3>No recieved Requests at this moment in time</h3>
+              )}
+            </Col>
           </Container>
         )
     }

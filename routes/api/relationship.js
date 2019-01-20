@@ -11,7 +11,6 @@ router
 // Matches with "/api/relationships/:id"
 router
     .route("/:id")
-    // .get(/*isAuthenticated,*/relationshipController.findAllFriendRequests)
     .put(/*isAuthenticated,*/relationshipController.acceptFriend)
     .delete(/*isAuthenticated,*/relationshipController.denyRequest)
 
