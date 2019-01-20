@@ -77,6 +77,14 @@ export default {
     // this should be handled later by req.user, but keep a body for now
     return axios.get("api/relationships", friendData);
   },
+  findAllSentRequests: function(id) {
+    // this should be handled by req.user, but show all requests sent to others
+    return axios.get("api/relationships/sent/" + id);
+  },
+  findAllRecievedRequests: function(id) {
+    // req.user, but show all requests recieved
+    return axios.get("api/relationships/recieved/:id" + id);
+  },
   // relationship id routes
   findAllRequests: function(id) {
     // same as 

@@ -5,7 +5,7 @@ const isAuthenticated = require("../../config/middleware/isAuthenticated");
 router
     .route("/")
     .post(passport.authenticate("local"), function(req, res) {
-      console.log(req.user);
+      // console.log(req.user);
       res.json(req.user);  
     })
 

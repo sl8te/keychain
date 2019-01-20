@@ -7,9 +7,9 @@ import { List, ListItem } from "../../components/List";
 class Authenticate extends Component {
   // Setting the component's initial state
   state = {
-    requests: [],
-    friends: [],
-    i: 0
+    sent: [],
+    recieved: [],
+    friends: []
   };
 
   // page will checkAuth when it is mounted
@@ -17,7 +17,8 @@ class Authenticate extends Component {
       // this.checkAuth to call command at the correct time
       this.checkAuth();
       this.loadFriends();
-      this.loadRequests();
+      this.loadSent();
+      this.loadRecieved();
   }
 
   loadFriends = () => {
@@ -26,10 +27,18 @@ class Authenticate extends Component {
       .catch(err => console.log(err));
   }
 
-  loadRequests = () => {
-    API.findAllRequests()
+  loadSent = () => {
+    API.findAllSentRequests()
       // need to preserve all of the data, but only need to show on screen the OTHER user
-      .then(res => console.log(res.data));
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err));
+  }
+
+  loadRecieved = () => {
+    API.findAllRecievedRequests()
+      // need to preserve all of the data, but only need to show on screen the OTHER user
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err));
   }
   
   // defining check auth
@@ -73,6 +82,21 @@ class Authenticate extends Component {
                 <h3>No friends to Display</h3>
               )}
             </Col>
+            {/* <Col size="md-12">
+              {this.state.requests.length ? (
+                <List>
+                  {this.state.requests.map(request => (
+                    <ListItem key={request._id}>
+                      <strong>
+                        {request}
+                      </strong>
+                    </ListItem>
+                  ))}
+                </List>
+              ) : (
+                <h3>No requests to Display</h3>
+              )}
+            </Col> */}
           </Container>
         )
     }

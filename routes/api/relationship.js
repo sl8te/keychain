@@ -11,9 +11,17 @@ router
 // Matches with "/api/relationships/:id"
 router
     .route("/:id")
-    .get(/*isAuthenticated,*/relationshipController.findAllFriendRequests)
+    // .get(/*isAuthenticated,*/relationshipController.findAllFriendRequests)
     .put(/*isAuthenticated,*/relationshipController.acceptFriend)
     .delete(/*isAuthenticated,*/relationshipController.denyRequest)
+
+router
+    .route("/recieved/:id")
+    .get(relationshipController.findAllRecievedRequests)
+
+router
+    .route("/sent/:id")
+    .get(relationshipController.findAllSentRequests)
 
 router
     .route("/requests/:id")
