@@ -25,8 +25,6 @@ class Login extends Component {
     // handleFormSubmit sends a post route to the server to log in
     handleFormSubmit = event => {
       event.preventDefault();
-      // make sure the function is working
-      console.log("something");
       // compare this.state against passport
       API.loginUser(this.state)
         // if it works user may or may not be in a larger object.  Double check the json data to see where your desired info is
@@ -34,7 +32,6 @@ class Login extends Component {
           // set user to be the desired info
           this.setState({user:user.data});
         })
-        
     }
   
     render () {
@@ -43,7 +40,7 @@ class Login extends Component {
         // If the user exists, redirect to your desired page
         return <Redirect to="/authenticate" user={this.state.user} />
       } else {
-      // else is usually set to ask user to log in, but since this is the login form, we need to have the ability for the user to log in  
+      // we need to have the ability for the user to log in  
       return (
         <form className="loginForm">
           <h2>Login</h2>          
