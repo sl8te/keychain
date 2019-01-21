@@ -2,24 +2,35 @@ const db = require("../models");
 
 // Defining methods for the userController
 module.exports = {
-    // find all users in a search, may not be used on the final website
-    // but good for testing the user creation process
-    findAllFriendRequests: function(req, res) {
+    // finds all sent requests from the user
+    findAllSentRequests: function(req, res) {
         db.Relationship
-            // this line is to test that the route works
-            // .find(req.body)
-            // the line below will be what's actually in use, can only test when front end is complete on this side
-            .find({ status: 0 , $or:[{ userOneId: req.user._id },{ userTwoId: req.user._id }]})
-            .then(dbRelationship => res.json(dbRelationship))
-            
-            .catch(err => res.status(422).json(err));
+        .find({ status: 0 , userOneId: req.user._id })
+        .populate("userTwoId")
+        .then(dbRelationship => {
+            console.log(dbRelationship);
+            res.json(dbRelationship)})
+        .catch(err => res.status(422).json(err));
     },
-    findOneFriend: function(req, res) {
+    // finds all received requests from the user
+    findAllRecievedRequests: function(req, res) {
+        db.Relationship
+        .find({ status: 0 , userTwoId: req.user._id })
+        .populate("userOneId")
+        .then(dbRelationship => {
+            console.log(dbRelationship);
+            res.json(dbRelationship)})
+        .catch(err => res.status(422).json(err));
+    },
+    // a check to determine if the user can see a friends data
+    checkFriendStatus: function(req, res) {
         db.Relationship
             // this will test that the route works
-            .findOne({ status: 1 , $or:[{ userOneId: req.body._id },{ userTwoId: req.body._id }]})
-            // the line beolw will be what's actually in use, can only test when front end is complete on this side
-            // .find({ status = 1 , $or:[{ user}]})
+            // this route will be a test to see if the user is friends with the other user
+            .findOne({ $or:[{ userOneId: req.body._id },{ userTwoId: req.body._id }]},
+                { $or:[{ userOneId: req.params._id },{ userTwoId: req.params._id }]})
+            .then(dbFriendShip => res.json(dbFriendShip))
+            .catch(err => res.status(422).json(err));
     },
     // for finding all friends of a user in a search
     findAllFriends: function(req, res) {
@@ -28,12 +39,12 @@ module.exports = {
             // testing in postman
             // .find(req.body)
             // testing in production
-            .find({ status: 1 , $or:[{ userOneId: req.body._id },{ userTwoId: req.body._id }]})
+            .find({ status: 1 , $or:[{ userOneId: req.user._id },{ userTwoId: req.user._id }]})
             // If we're able to successfully pull some relationships, let's start the recursion process to retrieve our friends
             .populate("userOneId")
             .populate("userTwoId")
             .then(dbRelationship => {
-                console.log(dbRelationship);
+                // console.log(dbRelationship);
                 // defining an empty array to put opposite user id in
                 var friendList = [];
                 // set up a counter to start at 0
@@ -42,24 +53,24 @@ module.exports = {
                 // // if i is less than dbRelationship.length, continue the function
                 function pushToFriendsList(){
                     if (i < dbRelationship.length) {
-                        console.log("running length");
+                        // console.log("running length");
                         // we want to capture the user that isn't the one querying the list
-                        if (dbRelationship[i].userOneId._id == req.body._id) {
+                        if (dbRelationship[i].userOneId._id == req.user._id) {
                             // first we push the opposite id of the request user to friendsList
                             // console.log("running push");
                             friendList.push(dbRelationship[i].userTwoId);
                             // then increase i by one
                             i++;
-                            console.log(i);
+                            // console.log(i);
                             // then we call the function again
                             pushToFriendsList();
-                        } else if (dbRelationship[i].userTwoId._id == req.body._id){
+                        } else if (dbRelationship[i].userTwoId._id == req.user._id){
                             // console.log("running else push");
                             // push opposite id of the request user to friendsList
                             friendList.push(dbRelationship[i].userOneId);
                             // increase i by one
                             i++;
-                            console.log(i);
+                            // console.log(i);
                             // call the function again
                             pushToFriendsList();
                         }   else {
@@ -83,7 +94,7 @@ module.exports = {
     acceptFriend: function(req, res) {
         console.log(req.body);
         db.Relationship
-            .findOneAndUpdate({ _id:req.params.id},{ status: req.body.status }, { new: true})
+            .findOneAndUpdate({ _id:req.params.id },{ status: 1 }, { new: true })
             .then(dbRelationship => res.json(dbRelationship))
             .catch(err => res.status(422).json(err));
     },
