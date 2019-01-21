@@ -6,6 +6,7 @@ import Signup from "./pages/signup/Signup";
 import Account from "./pages/account/Account";
 import Keys from "./pages/keys/Keys";
 import Login from "./pages/login/Login";
+import Search from "./pages/search/search";
 import Authenticate from "./pages/authenticate/authenticate";
 import API from "./utils/API";
 import Home from "./pages/home/Home";
@@ -22,6 +23,7 @@ function App() {
           <Route exact path="/keys" component={Keys} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/authenticate" component={Authenticate} />
+          <Route exact path="/search" component={Search} />
           {/* <Route exact path="/friends" component={Friends} /> */}
           <Route component={NoMatch} />
         </Switch>
