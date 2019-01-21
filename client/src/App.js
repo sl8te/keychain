@@ -9,6 +9,7 @@ import Login from "./pages/login/Login";
 import Authenticate from "./pages/authenticate/authenticate";
 import API from "./utils/API";
 import Home from "./pages/home/Home";
+import { FriendsList } from "./pages/friends/Friends";
 
 function App() {
   return (
@@ -21,19 +22,9 @@ function App() {
           <Route exact path="/account" component={Account} />
           <Route exact path="/keys" component={Keys} />
           <Route exact path="/login" component={Login} />
-<<<<<<< HEAD
-          <Route component={NoMatch} />
-          <Route exact path="/friends" component={Friends} />
-          {/* <Route exact path="/account" component={Account} />
-          <Route exact path="/friends" component={Friends} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/search" component={Search} /> */}
-=======
           <Route exact path="/authenticate" component={Authenticate} />
-          {/* <Route exact path="/friends" component={Friends} /> */}
+          <Route exact path="/friends" component={FriendsList}/>
           <Route component={NoMatch} />
->>>>>>> master
         </Switch>
       </div>
     </Router>
