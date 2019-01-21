@@ -1,22 +1,22 @@
-// import components for the friends list
-// import React, { Component } from "react";
-// import Jumbotron from "../components/Jumbotron";
-// import API from "../utils/API";
+import React, {Component} from "react";
 
-// class FriendsList extends component {}
-// state= {
-//     friends: [],
-//     fullName: "",
-//     keychain: "",
-//     thumbnail: "", 
-// }; 
-// componentDidMount(){
-//     this.loadFriends();
-// }
-// loadFriends=()=> {
-//     API.getFriends().then(res => this.setState({friends: res.data, fullName: "", keychain: "", thumbnail: ""})
-//     ) .catch(err => console.log(err));
-// };
+// import Jumbotron from "../components/Jumbotron";
+import API from "../utils/API";
+
+class FriendsList extends Component {}
+constructor(props); 
+{ this.state= {
+    friends: [],
+    fullName: "",
+    keychain: "",
+    thumbnail: "", 
+ }}; 
+ componentDidMount(){
+     this.loadFriends();
+ }
+ loadFriends=()=> {
+    API.getFriends().then(res => this.setState({friends: res.data, fullName: "", keychain: "", thumbnail: ""})) .catch(err => console.log(err));
+ };
 // deleteFriendList = id => {
 //     API.deleteFriendList(id)
 //       .then(res => this.FriendsList())
@@ -36,19 +36,19 @@ render();
     return (
     <Container>
         <Div class="card">
-            <Image>
+            <Image>{this.thumbnail}
                 {/* {this.friendsThumbnail} i.e. the friend's profile image */}
             </Image>
             <Div class="card-body">
-                <h5 class="card-title">
+                <h5 class="card-title"> {this.fullName}
                     {/* {this.fullName} i.e. the friend's first and last name*/}
                 </h5>
                 <p>
-                    Click the button to view 
+                    Click the button to view {this.fullName}
                     {/* {this.fullName} */} 
                     's keys.
                 </p>
-                <a href="" class="btn btn-primary">
+                <a href="" class="btn btn-primary">{this.keychain}
                     {/* {this.friendsKeychainLink} i.e. the link to friends keychain profile.*/}
                 </a>
             </Div>
@@ -65,4 +65,4 @@ render();
         
 //     )
 // }
-// export function FriendsList();
+ export function FriendsList();
