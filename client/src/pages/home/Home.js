@@ -8,7 +8,7 @@ class Home extends Component {
 
     render () {
       return (                
-        <div className="home">
+        <div className="homePage">
           <h1>Keychain</h1>  
           <h3>A place to keep all your account links and connect with friends</h3>  
           <br/>
