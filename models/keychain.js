@@ -19,6 +19,8 @@ var KeychainSchema = new Schema({
   link: String
 });
 
+// console.log("Patriots rock #1");
+
 // This creates our model from the above schema, using mongoose's model method
 var Keychain = mongoose.model("Keychain", KeychainSchema);
 
