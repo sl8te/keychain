@@ -35,7 +35,8 @@ render();
 {
     return (
     <Container>
-        <Div class="card">
+        <Div class="card-card">
+            <Div class="card"> 
             <Image>{this.thumbnail}
                 {/* {this.friendsThumbnail} i.e. the friend's profile image */}
             </Image>
@@ -52,6 +53,7 @@ render();
                     {/* {this.friendsKeychainLink} i.e. the link to friends keychain profile.*/}
                 </a>
             </Div>
+        </Div>
         </Div>
     </Container>
 
