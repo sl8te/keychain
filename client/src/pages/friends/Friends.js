@@ -1,63 +1,72 @@
 import React, {Component} from "react";
+import Card from "../../components/Card"; 
+import { Col, Row, Container } from "../../components/Grid";
+// import API from "../utils/API";
 
-// import Jumbotron from "../components/Jumbotron";
-import API from "../utils/API";
+class FriendsList extends Component {
+    state = {
+        fullName: "",
+        keychain: "",
+        thumbnail:""
+    };
 
-class FriendsList extends Component {}
-constructor(props); 
-{ this.state= {
-    friends: [],
-    fullName: "",
-    keychain: "",
-    thumbnail: "", 
- }}; 
- componentDidMount(){
-     this.loadFriends();
- }
- loadFriends=()=> {
-    API.getFriends().then(res => this.setState({friends: res.data, fullName: "", keychain: "", thumbnail: ""})) .catch(err => console.log(err));
- };
+// constructor(props); 
+// { this.state= {
+//     friends: [],
+//     fullName: "",
+//     keychain: "",
+//     thumbnail: "", 
+//  }}; 
+//  componentDidMount() {
+//     this.loadFriends();
+//  }
+//  loadFriends=()=> {
+//     API.getFriends()
+//     .then(res => this.setState({friends: res.data, fullName: "", keychain: "", thumbnail: ""})
+//     ) 
+//     .catch(err => console.log(err));
+//  };
 // deleteFriendList = id => {
 //     API.deleteFriendList(id)
 //       .then(res => this.FriendsList())
 //       .catch(err => console.log(err));
 //   };
 
-//   handleInputChange = event => {
-//     const { name, value } = event.target;
-//     this.setState({
-//       [name]: value
-//     });
-//   };
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
 
 
-render();
-{
+render() {
     return (
-    <Container>
-        <Div class="card-card">
-            <Div class="card"> 
-            <Image>{this.thumbnail}
+    <Container fluid>
+        <div class="card-card">
+            <div class="card"> 
+            <image>
                 {/* {this.friendsThumbnail} i.e. the friend's profile image */}
-            </Image>
-            <Div class="card-body">
-                <h5 class="card-title"> {this.fullName}
+            </image>
+            <div class="card-body">
+                <h5 class="card-title">
                     {/* {this.fullName} i.e. the friend's first and last name*/}
                 </h5>
                 <p>
-                    Click the button to view {this.fullName}
+                    Click the button to view
                     {/* {this.fullName} */} 
                     's keys.
                 </p>
-                <a href="" class="btn btn-primary">{this.keychain}
+                <a href="" class="btn btn-primary">
                     {/* {this.friendsKeychainLink} i.e. the link to friends keychain profile.*/}
                 </a>
-            </Div>
-        </Div>
-        </Div>
+            </div>
+        </div>
+        </div>
     </Container>
 
-    );
+        );
+    }
 }
 
 // //Move to a component item? 
@@ -67,4 +76,4 @@ render();
         
 //     )
 // }
- export function FriendsList();
+ export default FriendsList;

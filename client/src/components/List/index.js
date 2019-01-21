@@ -3,7 +3,7 @@ import "./style.css";
 
 // This file exports both the List and ListItem components
 
-export function friendsList({ children }) {
+export function List({ children }) {
   return ( <div className={`container`}>{children}</div>
  
   );
