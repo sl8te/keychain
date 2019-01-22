@@ -55,11 +55,13 @@ class Authenticate extends Component {
     })
   }
 
-  // loadRequests = () => {
-  //   if(i < res.data.length) {
-
-  //   }
-  // }
+  handleLogout = () => {
+    // console.log("attempting to log out");
+    API.logoutUser().then(res => { 
+      console.log(res);
+      window.location.assign("/");
+    });
+  }
 
   render() {
     // render desired page on the if statement
@@ -67,6 +69,7 @@ class Authenticate extends Component {
         return (
           <Container fluid>
             <h1>Hello {this.state.firstName}</h1>
+            <button className="btn btn-danger" onClick={this.handleLogout}>Logout</button>
             <Col size="md-12">
               <h2>Friends List</h2>
               {this.state.friends.length ? (
@@ -100,7 +103,7 @@ class Authenticate extends Component {
               )}
             </Col>
             <Col size="md-12">
-              <h2>recieved friend Requests</h2>
+              <h2>Recieved friend Requests</h2>
               {this.state.recieved.length ? (
                 <List>
                   {this.state.recieved.map(friend => (

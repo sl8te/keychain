@@ -8,7 +8,7 @@ module.exports = {
         .find({ status: 0 , userOneId: req.user._id })
         .populate("userTwoId")
         .then(dbRelationship => {
-            console.log(dbRelationship);
+            // console.log(dbRelationship);
             res.json(dbRelationship)})
         .catch(err => res.status(422).json(err));
     },
@@ -18,7 +18,7 @@ module.exports = {
         .find({ status: 0 , userTwoId: req.user._id })
         .populate("userOneId")
         .then(dbRelationship => {
-            console.log(dbRelationship);
+            // console.log(dbRelationship);
             res.json(dbRelationship)})
         .catch(err => res.status(422).json(err));
     },
