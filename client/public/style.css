@@ -5,6 +5,9 @@
 .navbar-brand{
     color: darkgreen;
 }
+.navbar-brand:hover{
+    color: #c3f4c1;
+}
 
 .jumbotron{
     background: gray;
