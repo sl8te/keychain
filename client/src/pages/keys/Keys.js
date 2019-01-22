@@ -44,6 +44,13 @@ class Keys extends Component {
         .catch(err => console.log(err));
     }
 
+    //add a key when you hit the submit button
+    addKey = () => {
+        API.addKey()
+        .then(res=> this.loadKeys())
+        .catch(err => console.log(err));
+    }
+
     //handle input function
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -85,8 +92,8 @@ class Keys extends Component {
                                     <p id="platform_profile_link">Profile link</p>
                                 </div>
                                 <div className="col-sm-4" id="btn-wrapper">
-                                    <button type="button" class="btn btn-success" id="edit-btn">Edit</button> 
-                                    <button type="button" class="btn btn-danger" id="delete-btn">X</button> 
+                                    <button className="btn btn-success" id="edit-btn">Edit</button> 
+                                    <button className="btn btn-danger" id="delete-btn" onClick={this.deleteKey}>X</button> 
                                 </div>
                             </div>
                         </div>
@@ -109,7 +116,7 @@ class Keys extends Component {
                             </div>
                             </div>
                             <div className="col-sm-3">
-                                <button type="button" class="btn btn-primary" id="submit-btn">Submit</button> 
+                                <button className="btn btn-primary" id="submit-btn" onClick={this.addKey}>Submit</button> 
                             </div>
                         </div>
                     </form>
