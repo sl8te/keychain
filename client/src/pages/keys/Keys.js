@@ -87,7 +87,7 @@ class Keys extends Component {
                         <div className="row">
                             <div className= "key-wrapper">
                                 <div className="col-sm-8" id="key-list">
-                                    <p id="platform_name">{this.state.account}p</p>
+                                    <p id="platform_name">{this.state.account}</p>
                                     <p id="platform_username">{this.state.username}</p>
                                     <p id="platform_profile_link">{this.state.link}</p>
                                 </div>
@@ -104,15 +104,15 @@ class Keys extends Component {
                             <div className="col-sm-9">
                             <div className={'form-group'}>
                                 <label htmlFor="platform">Platform/App</label>
-                                <input type="text" className="form-control" name="platform" placeholder="Xbox One"/>
+                                <input type="text" className="form-control" name="platform" placeholder="Xbox One" onChange={this.handleInputChange}/>
                             </div>
                             <div className={'form-group'}>
                                 <label htmlFor="userName">User Name</label>
-                                <input type="text" className="form-control" name="userName" placeholder="Halo_Addict2099"/>
+                                <input type="text" className="form-control" name="userName" placeholder="Halo_Addict2099"    onChange={this.handleInputChange}/>
                             </div>
                             <div className={'form-group'}>
                                 <label htmlFor="profileLink">Profile Link (optional)</label>
-                                <input type="text" className="form-control" name="profileLink" placeholder="Profile Link"/>
+                                <input type="text" className="form-control" name="profileLink" placeholder="Profile Link"    onChange={this.handleInputChange}/>
                             </div>
                             </div>
                             <div className="col-sm-3">
