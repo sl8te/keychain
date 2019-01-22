@@ -61,20 +61,13 @@ class Authenticate extends Component {
     });
   }
 
-  handleEdit = () => {        
-    window.location.assign("/account");     
-  }
-
   render() {
     // render desired page on the if statement
     if(this.state.firstName){
         return (
           <Container fluid>
             <h1>Hello {this.state.firstName}</h1>
-            <button className="btnHome" onClick={this.handleLogout}>Logout</button>
-            <br/>
-            <br/>
-            <button className="btnHome" onClick={this.handleEdit}>Edit Account</button>
+            <button className="btn btn-danger" onClick={this.handleLogout}>Logout</button>
             <Col size="md-12">
               <h2>Friends List</h2>
               {this.state.friends.length ? (

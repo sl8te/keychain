@@ -25,8 +25,8 @@ export default {
   findOneUser: function() {
     return axios.get("/api/users/me");
   },
-  editUser: function(id, editRes) {
-    return axios.put("/api/users/" + id, editRes);
+  editUser: function(editRes) {
+    return axios.put("/api/users/", editRes);
   },
   deleteUser: function(id) {
     return axios.delete("/api/users/" + id);
@@ -45,7 +45,7 @@ export default {
     return axios.post("api/login", loginUser);
   },
   logoutUser: function() {
-    return axios.post("api/logout");
+    return axios.get("api/logout");
   },
 
   //========================================
