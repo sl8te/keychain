@@ -81,7 +81,10 @@ class Signup extends Component {
       lastName: this.state.lastName,
       photoLink: this.state.photoLink
     })
-    .then(result => console.log(result))
+    .then( result => {
+      console.log(result);
+      window.location.assign("/login");
+    })
   }
 
   render () {
