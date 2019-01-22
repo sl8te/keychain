@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { FormErrors } from './FormErrors';
+import API from "../../utils/API";
 
 
 class Account extends Component {
@@ -17,6 +18,10 @@ class Account extends Component {
       confirmPasswordValid: false,
       formValid: false
     }
+  }
+
+  componentDidMount() {
+    this.checkAuth();
   }
 
   handleUserInput = (e) => {
@@ -63,51 +68,69 @@ class Account extends Component {
     return(error.length === 0 ? '' : 'has-error');
   }
 
+  checkAuth = () => {
+    // api call to find the user using our cookie information
+    API.findOneUser().then(dbUser => {
+      // check if the data you're getting back has the properties you're looking for
+      if(dbUser.data.firstName){
+      // set state to fill what the user state is.  Will just add to state
+      this.setState(dbUser.data);
+    }
+  })
+  }
+
   render () {
-    return (
-      <form className="accountForm">
-        <h2>Account Details</h2>
-        <div className="panel panel-default">
-          <FormErrors formErrors={this.state.formErrors} />
-        </div>
-        <div className="col-md-8">              
-          <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
-            <label htmlFor="password">Change Password (must contain at least 1 uppercase letter and be 6 to 10 characters long)</label>          
-            <input type="password" className="form-control" name="password"
-              placeholder="Password" required
-              value={this.state.password}
-              onChange={this.handleUserInput}  autoFocus/>
+    if(this.state.firstName) {
+      return (
+        <form className="accountForm">
+          <h2>Account Details</h2>
+          <div className="panel panel-default">
+            <FormErrors formErrors={this.state.formErrors} />
           </div>
-          <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
-            <label htmlFor="confirmPassword">Confirm Password</label>
-            <input type="password" className="form-control" name="confirmPassword"
-              placeholder="Confirm Password" required
-              value={this.state.confirmPassword}
-              onChange={this.handleUserInput}  />
-          </div>
-          <div className={'form-group'}>
-            <label htmlFor="firstName">First Name</label>
-            <input type="text" className="form-control" name="firstName"
-              placeholder="First Name"
-              value={this.state.firstName}
-              onChange={this.handleUserInput}  />
-          </div>
-          <div className={'form-group'}>
-            <label htmlFor="lastName">Last Name</label>
-            <input type="text" className="form-control" name="lastName"
-              placeholder="Last Name"
-              value={this.state.lastName}
-              onChange={this.handleUserInput}  />
-          </div> 
-        </div>       
-        <button type="submit" className="btn" disabled={!this.state.formValid}>Submit Changes</button>
-        <br/>
-        <br/>
-        {/* <button type="submit" className="btn btn-danger" >Delete Account</button> */}
-        <button className="deleteBTN" onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) this.deleteItem(e) } }>
-              Delete Account</button>
-      </form>
-    )
+          <div className="col-md-8">              
+            <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
+              <label htmlFor="password">Change Password (must contain at least 1 uppercase letter and be 6 to 10 characters long)</label>          
+              <input type="password" className="form-control" name="password"
+                placeholder="Password" required
+                value={this.state.password}
+                onChange={this.handleUserInput}  autoFocus/>
+            </div>
+            <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <input type="password" className="form-control" name="confirmPassword"
+                placeholder="Confirm Password" required
+                value={this.state.confirmPassword}
+                onChange={this.handleUserInput}  />
+            </div>
+            <div className={'form-group'}>
+              <label htmlFor="firstName">First Name</label>
+              <input type="text" className="form-control" name="firstName"
+                placeholder="First Name"
+                value={this.state.firstName}
+                onChange={this.handleUserInput}  />
+            </div>
+            <div className={'form-group'}>
+              <label htmlFor="lastName">Last Name</label>
+              <input type="text" className="form-control" name="lastName"
+                placeholder="Last Name"
+                value={this.state.lastName}
+                onChange={this.handleUserInput}  />
+            </div> 
+          </div>       
+          <button type="submit" className="btn" disabled={!this.state.formValid}>Submit Changes</button>
+          <br/>
+          <br/>
+          {/* <button type="submit" className="btn btn-danger" >Delete Account</button> */}
+          <button className="deleteBTN" onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) this.deleteItem(e) } }>
+                Delete Account</button>
+        </form>
+      )
+    }
+    else {
+      return(
+        <h1>Must be logged in to view this page.  You may do so <a href="/login">here</a>.</h1>
+      )
+    }
   }
 }
 

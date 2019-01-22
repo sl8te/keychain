@@ -22,9 +22,6 @@ const UserSchema = new Schema({
         required: true 
     },
     photoLink: String,
-    isLoggedIn: {
-        type: Boolean
-    },
     // keychains should link back to keychains
     keychains: [
         {
