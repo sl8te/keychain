@@ -48,6 +48,18 @@
     background: darkgreen;
     color: white;
 }
+.btnSearch{
+    background: #92f442;
+    color: #000;    
+}
+.btnSearch:hover{
+    background: darkgreen;
+    color: white;
+}
+.searchBtn{
+    text-align: center;
+}
+
 /* Specific Styling for Keys Page */
 /* ================================= */
     /* top section: key list */
