@@ -25,11 +25,11 @@ export default {
   findOneUser: function() {
     return axios.get("/api/users/me");
   },
+  editUser: function(editRes) {
+    return axios.put("/api/users/", editRes);
+  },
   findOtherUser: function(id) {
     return axios.get("/api/users/view/" + id);
-  },
-  editUser: function(id, editRes) {
-    return axios.put("/api/users/" + id, editRes);
   },
   deleteUser: function(id) {
     return axios.delete("/api/users/" + id);

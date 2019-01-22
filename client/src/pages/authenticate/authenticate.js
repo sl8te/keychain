@@ -62,13 +62,24 @@ class Authenticate extends Component {
     });
   }
 
+  handleEdit = () => {        
+    window.location.assign("/account");     
+  }
+
+  handleSearch = () => {
+    window.location.assign("/searchOne");
+  }
+
   render() {
     // render desired page on the if statement
     if(this.state.firstName){
         return (
           <Container fluid>
             <h1>Hello {this.state.firstName}</h1>
-            <button className="btn btn-danger" onClick={this.handleLogout}>Logout</button>
+            <button className="btnHome" onClick={this.handleLogout}>Logout</button>
+            <br/>
+            <br/>
+            <button className="btnHome" onClick={this.handleEdit}>Edit Account</button>
             <Col size="md-12">
               <h2>Friends List</h2>
               {this.state.friends.length ? (
@@ -121,6 +132,11 @@ class Authenticate extends Component {
                 <h3>No recieved Requests at this moment in time</h3>
               )}
             </Col>
+            <br/>
+            <br/>
+            <div class="searchBtn">
+              <button type="button" className="btnSearch" onClick={this.handleSearch}>Search for Friends</button>
+            </div>
           </Container>
         )
     }

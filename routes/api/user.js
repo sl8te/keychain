@@ -6,7 +6,6 @@ const isAuthenticated = require("../../config/middleware/isAuthenticated");
 router
   .route("/:id")
   // .get(/*isAuthenticated,*/userController.findOneUser)
-  .put(/*isAuthenticated,*/userController.editUser)
   .delete(/*isAuthenticated,*/userController.deleteUser)
   // .route("/:id")
   // .get(isAuthenticated, userController.findOneUser)
@@ -15,6 +14,7 @@ router
 router
   .route("/")
   .get(/*isAuthenticated,*/userController.findAll)
+  .put(/*isAuthenticated,*/userController.editUser)
   .post(userController.createUser)
 
 router
