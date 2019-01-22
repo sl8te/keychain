@@ -65,6 +65,10 @@ class Authenticate extends Component {
     window.location.assign("/account");     
   }
 
+  handleSearch = () => {
+    window.location.assign("/searchOne");
+  }
+
   render() {
     // render desired page on the if statement
     if(this.state.firstName){
@@ -123,6 +127,11 @@ class Authenticate extends Component {
                 <h3>No recieved Requests at this moment in time</h3>
               )}
             </Col>
+            <br/>
+            <br/>
+            <div class="searchBtn">
+              <button type="button" className="btnSearch" onClick={this.handleSearch}>Search for Friends</button>
+            </div>
           </Container>
         )
     }
