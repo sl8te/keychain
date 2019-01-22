@@ -8,3 +8,4 @@ const friends = new Schema({
   
   module.exports = Friends;
   
+  
