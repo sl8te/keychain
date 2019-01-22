@@ -27,9 +27,13 @@ module.exports = {
         db.Relationship
             // this will test that the route works
             // this route will be a test to see if the user is friends with the other user
-            .findOne({ $or:[{ userOneId: req.body._id },{ userTwoId: req.body._id }]},
-                { $or:[{ userOneId: req.params._id },{ userTwoId: req.params._id }]})
-            .then(dbFriendShip => res.json(dbFriendShip))
+            .find({ $and: [ { $or:[{ userOneId: req.user._id },{ userTwoId: req.user._id }]}, { $or: [{ userOneId: req.params.id }, { userTwoId: req.params.id } ] } ] } )
+            //.populate("userOneId")
+            //.populate("userTwoId")
+            .then(dbFriendShip => {
+                // console.log(dbFriendShip);
+                res.json(dbFriendShip)
+            })
             .catch(err => res.status(422).json(err));
     },
     // for finding all friends of a user in a search

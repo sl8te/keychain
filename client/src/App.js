@@ -25,7 +25,8 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/authenticate" component={Authenticate} />
           <Route exact path="/friends" component={FriendsList}/>
-          <Route exact path="/view" component={View} />
+          {/* <Route exact path="/view" component={View} /> */}
+          <Route exact path="/view/:id" component={View} />
           {/* <Route exact path="/friends" component={Friends} /> */}
           <Route component={NoMatch} />
         </Switch>
