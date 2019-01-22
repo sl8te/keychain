@@ -13,6 +13,7 @@ router
     .route("/:id")
     .put(/*isAuthenticated,*/relationshipController.acceptFriend)
     .delete(/*isAuthenticated,*/relationshipController.denyRequest)
+    .get(relationshipController.checkFriendStatus)
 
 router
     .route("/recieved/:id")
@@ -22,8 +23,4 @@ router
     .route("/sent/:id")
     .get(relationshipController.findAllSentRequests)
 
-router
-    .route("/requests/:id")
-    .get(/*isAuthenticated,*/relationshipController.checkFriendStatus)
-    
   module.exports = router;
