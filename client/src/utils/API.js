@@ -45,7 +45,7 @@ export default {
     return axios.post("api/login", loginUser);
   },
   logoutUser: function() {
-    return axios.post("api/logout");
+    return axios.get("api/logout");
   },
 
   //========================================
