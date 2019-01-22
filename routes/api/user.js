@@ -23,4 +23,8 @@ router
       res.json(req.user);
     })
 
+router
+  .route("/view/:id")
+  .get(userController.findOtherUser)
+
   module.exports = router;

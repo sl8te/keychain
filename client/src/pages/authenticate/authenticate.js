@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import { throws } from "assert";
+import {Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 
@@ -85,9 +86,11 @@ class Authenticate extends Component {
                 <List>
                   {this.state.friends.map(friend => (
                     <ListItem key={friend._id}>
-                      <strong>
-                        {friend.firstName} {friend.lastName}
-                      </strong>
+                      <Link to={"/view/" + friend._id}>
+                        <strong>
+                          {friend.firstName} {friend.lastName}
+                        </strong>
+                      </Link>
                     </ListItem>
                   ))}
                 </List>
@@ -101,9 +104,11 @@ class Authenticate extends Component {
                 <List>
                   {this.state.sent.map(friend => (
                     <ListItem key={friend._id}>
-                      <strong>
-                        {friend.userTwoId.firstName} {friend.userTwoId.lastName}
-                      </strong>
+                      <Link to={"/view/" + friend._id}>
+                        <strong>
+                          {friend.userTwoId.firstName} {friend.userTwoId.lastName}
+                        </strong>
+                      </Link>
                     </ListItem>
                   ))}
                 </List>

@@ -18,9 +18,15 @@ module.exports = {
             .then(dbUser => res.json(dbUser))
             .catch(err => res.status(422).json(err));
     },
+    findOtherUser: function(req, res) {
+        db.User
+            .findOne({ _id: req.params.id })
+            .populate("keychains")
+            .then(dbUser => res.json(dbUser))
+            .catch(err => res.status(422).json(err));
+    },
     // for creating a user, the req.body should have first name, last name, email and password
     createUser: function(req, res) {
-        console.log(req.body);
         db.User
             .create(req.body)
             .then(dbUser => res.json(dbUser))
