@@ -23,7 +23,7 @@ module.exports = {
         db.Keychain
             .create(req.body)
             .then(dbKeychain => {
-                return db.User.findOneAndUpdate({ _id: req.params.id }, { $push: { keychains: dbKeychain._id } }, { new: true })
+                return db.User.findOneAndUpdate({ _id: req.user._id }, { $push: { keychains: dbKeychain._id } }, { new: true })
             })
             .then(dbUser => res.json(dbUser))
             .catch(err => res.status(422).json(err));
