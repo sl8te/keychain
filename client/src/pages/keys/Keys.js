@@ -87,9 +87,9 @@ class Keys extends Component {
                         <div className="row">
                             <div className= "key-wrapper">
                                 <div className="col-sm-8" id="key-list">
-                                    <p id="platform_name">Platform/App</p>
-                                    <p id="platform_username">Username</p>
-                                    <p id="platform_profile_link">Profile link</p>
+                                    <p id="platform_name">{this.state.account}p</p>
+                                    <p id="platform_username">{this.state.username}</p>
+                                    <p id="platform_profile_link">{this.state.link}</p>
                                 </div>
                                 <div className="col-sm-4" id="btn-wrapper">
                                     <button className="btn btn-success" id="edit-btn">Edit</button> 
