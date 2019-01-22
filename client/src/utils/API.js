@@ -25,8 +25,8 @@ export default {
   findOneUser: function() {
     return axios.get("/api/users/me");
   },
-  editUser: function(id, editRes) {
-    return axios.put("/api/users/" + id, editRes);
+  editUser: function(editRes) {
+    return axios.put("/api/users/", editRes);
   },
   deleteUser: function(id) {
     return axios.delete("/api/users/" + id);
