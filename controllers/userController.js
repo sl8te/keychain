@@ -13,7 +13,7 @@ module.exports = {
     // for finding an indivdual user in a search
     findOneUser: function(req, res) {
         db.User
-            .findOne(req.params.id)
+            .findOne(req.user._id)
             .then(dbUser => res.json(dbUser))
             .catch(err => res.status(422).json(err));
     },
@@ -22,6 +22,20 @@ module.exports = {
         console.log(req.body);
         db.User
             .create(req.body)
+            .then(dbUser => res.json(dbUser))
+            .catch(err => res.status(422).json(err));
+    },
+    editUser: function(req, res) {
+        console.log(req.body);
+        db.User
+            .findOneAndUpdate({ _id: req.params.id }, req.body)
+            .then(dbUser => res.json(dbUser))
+            .catch(err => res.status(422).json(err));
+    },
+    deleteUser: function(req, res) {
+        console.log(req.body);
+        db.User
+            .deleteOne({ _id: req.params.id })
             .then(dbUser => res.json(dbUser))
             .catch(err => res.status(422).json(err));
     }

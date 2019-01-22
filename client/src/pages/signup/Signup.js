@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { FormErrors } from './FormErrors';
 
-
 class Signup extends Component {
   constructor (props) {
     super(props);
@@ -11,7 +10,7 @@ class Signup extends Component {
       confirmPassword: '',
       firstName: '',
       lastName: '',
-      key: '',
+      // key: '',
       formErrors: {email: '', password: '', confirmPassword: ''},
       emailValid: false,
       passwordValid: false,
