@@ -43,11 +43,10 @@ class FriendsList extends Component {
 render() {
     return (
     <Container fluid>
-        <div class="card-card">
+        <div class="card">
             <div class="card"> 
-            <image > <a href=""></a>
-                {/* {this.friendsThumbnail} i.e. the friend's profile image */}
-            </image>
+            <div class="card-img-top"/>
+            <img src='https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1502&q=80'thumbnail/>
             <div class="card-body">
                 <h5 class="card-title"> Person Name
                     {/* {this.fullName} i.e. the friend's first and last name*/}
@@ -77,3 +76,6 @@ render() {
 //     )
 // }
  export default FriendsList;
+
+
+ 
