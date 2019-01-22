@@ -45,11 +45,11 @@ render() {
     <Container fluid>
         <div class="card-card">
             <div class="card"> 
-            <image>
+            <image > <a href=""></a>
                 {/* {this.friendsThumbnail} i.e. the friend's profile image */}
             </image>
             <div class="card-body">
-                <h5 class="card-title">
+                <h5 class="card-title"> Person Name
                     {/* {this.fullName} i.e. the friend's first and last name*/}
                 </h5>
                 <p>
