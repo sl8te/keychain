@@ -10,6 +10,7 @@ import Authenticate from "./pages/authenticate/authenticate";
 import API from "./utils/API";
 import Home from "./pages/home/Home";
 import FriendsList from "./pages/friends/Friends";
+import View from "./pages/view/View";
 
 function App() {
   return (
@@ -24,6 +25,8 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/authenticate" component={Authenticate} />
           <Route exact path="/friends" component={FriendsList}/>
+          <Route exact path="/view" component={View} />
+          {/* <Route exact path="/friends" component={Friends} /> */}
           <Route component={NoMatch} />
         </Switch>
       </div>

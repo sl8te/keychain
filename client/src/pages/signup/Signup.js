@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { FormErrors } from './FormErrors';
+import API from "../../utils/API";
 
 class Signup extends Component {
   constructor (props) {
@@ -10,7 +11,7 @@ class Signup extends Component {
       confirmPassword: '',
       firstName: '',
       lastName: '',
-      key: '',
+      photoLink: '',
       formErrors: {email: '', password: '', confirmPassword: ''},
       emailValid: false,
       passwordValid: false,
@@ -70,6 +71,22 @@ class Signup extends Component {
     return(error.length === 0 ? '' : 'has-error');
   }
 
+  handleFormSubmit = event => {
+    event.preventDefault();
+    // console.log(`{ email: ${this.state.email}, password: ${this.state.password}, firstName: ${this.state.firstName}, lastName: ${this.state.lastName} }`);
+    API.createUser({
+      email: this.state.email,
+      password: this.state.password,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      photoLink: this.state.photoLink
+    })
+    .then( result => {
+      console.log(result);
+      window.location.assign("/login");
+    })
+  }
+
   render () {
     return (
       <form className="signupForm">
@@ -112,9 +129,16 @@ class Signup extends Component {
               placeholder="Last Name" required
               value={this.state.lastName}
               onChange={this.handleUserInput}  />
+          </div>
+          <div className={'form-group'}>
+            <label htmlFor="photoLink">Link for profile photo</label>
+            <input type="text" className="form-control" name="photoLink"
+              placeholder="Optional" required
+              value={this.state.photoLink}
+              onChange={this.handleUserInput}  />
           </div>  
         </div>                
-        <button type="submit" className="btn" disabled={!this.state.formValid}>Sign up</button>
+        <button type="button" className="btn" disabled={!this.state.formValid} onClick={this.handleFormSubmit}>Sign up</button>
       </form>
     )
   }
