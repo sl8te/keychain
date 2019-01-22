@@ -14,19 +14,34 @@ class Keys extends Component {
     }
 
     componentDidMount() {
+        this.checkAuth();
         this.loadKeys();
       }
 
+    // defining check auth
+    checkAuth = () => {
+        // api call to find the user using our cookie information
+        API.findOneUser().then(dbUser => {
+            // check if the data you're getting back has the properties you're looking for
+            if(dbUser.data.firstName){
+            // set state to fill what the user state is.  Will just add to state
+            this.setState(dbUser.data);
+            }
+        })
+    }
+
     //define loadKeys here
     loadKeys = () => {
-        API.findAll()
+        API.findKeys()
         .then(res => this.setState({ keys: res.data }))
         .catch(err => console.log(err));
     }
      
     //remove a key from a user
-    deleteKey = () => {
-        API.deleteKey().then()
+    deleteKey = id => {
+        API.deleteKey(id)
+        .then(res => this.loadKeys())
+        .catch(err => console.log(err));
     }
 
     //handle input function
@@ -41,7 +56,7 @@ class Keys extends Component {
         event.preventDefault();
         if (this.state.user) {
           API.addKey({
-            platform: this.state.account,
+            account: this.state.account,
             userName: this.state.username,
             proflileLink: this.state.link
           })
@@ -61,14 +76,14 @@ class Keys extends Component {
                 <br></br>
                     <h2>Your Keys</h2>
                     <br></br>
-                    <div className="dropdown">
+                    {/* <div className="dropdown">
                         <a className="btn btn-secondary dropdown-toggle fa fa-bars" href="#" role="button" id="dropLinks" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="fa fa-bars"></i>
                         </a>
                         <div className="dropdown-menu" aria-labelledby="dropLinks">
                             <a className="dropdown-item" href="#">Search for Friends</a>
                             <a className="dropdown-item" href="#">Log Out</a>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="row">
                         <div className= "key-wrapper">
                             <div className="col-sm-8" id="key-list">
