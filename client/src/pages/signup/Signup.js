@@ -10,7 +10,7 @@ class Signup extends Component {
       confirmPassword: '',
       firstName: '',
       lastName: '',
-      key: '',
+      // key: '',
       formErrors: {email: '', password: '', confirmPassword: ''},
       emailValid: false,
       passwordValid: false,
