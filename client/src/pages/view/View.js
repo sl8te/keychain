@@ -35,7 +35,7 @@ class View extends Component {
     checkFriendship = () => {
       API.checkFriendStatus(this.props.match.params.id).then(dbFriendship => {
           console.log(dbFriendship.data);
-          this.setState({ friendStatus: dbFriendship.data.status });
+          this.setState({ friendStatus: dbFriendship.data });
       })
     }
 
@@ -52,7 +52,7 @@ class View extends Component {
     }
 
     render () {
-      if(this.state.user.firstName) {
+      if(this.state.user.firstName && this.state.friendStatus.status == 1) {
         return (   
         <Container>
         <h1>{this.state.keyholder.firstName} {this.state.keyholder.lastName}'s Keychain</h1>
@@ -72,6 +72,9 @@ class View extends Component {
         </Container>
         )
       }
+      // else if(this.state.user.firstName && (this.state.friendStatus.status == 0 && this.state.friendStatus.userOneId == this.state.user._id))  {
+
+      // }
       else {
         return(
           <h1>Must be logged in to view this page.  You may do so <a href="/login">here</a>.</h1>
