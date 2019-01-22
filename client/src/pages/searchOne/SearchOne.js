@@ -4,7 +4,10 @@ import { Redirect } from "react-router-dom";
 
 class Search extends Component {
     constructor (props) {
-      super(props);            
+      super(props);   
+      this.state = {
+        search: ""
+      }         
     }
   
     handleUserInput = (e) => {
@@ -14,6 +17,14 @@ class Search extends Component {
         [name]: value
       });
     };    
+
+    handleSearch = () => {
+      console.log(this.state.search);
+      API.findAllUsers(this.state.search)      
+      .then(res => {
+        console.log(res.data);
+        this.setState({ users: res.data })})
+    }
 
     handleReturn = () => {        
       window.location.assign("/authenticate");     
@@ -30,7 +41,7 @@ class Search extends Component {
               onChange={this.handleUserInput}  />
           </div>          
           <br/>
-          <button type="button" className="btnHome" onClick={this.handleSearch}>Search</button>
+          <button type="button" className="btnHome" onClick={this.handleSearch}>Search</button>          
           <br/>
           <br/>
           <br/>
