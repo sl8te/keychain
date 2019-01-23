@@ -4,7 +4,7 @@ import { throws } from "assert";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 
-class Authenticate extends Component {
+class FriendsList extends Component {
   // Setting the component's initial state
   state = {
     sent: [],
@@ -67,11 +67,23 @@ render() {
     return (
     <Container fluid>
         <div class="card">
-            <div class="card"> 
-            <div class="card-img-top"/>
+        {this.state.friends.length ? (
+            <div className="results">
+            {this.state.friends.map(friend => (
+                <div className="card" key={friend._id}>
+                    <img src={friend.photoLink} />
+                    <h3>{friend.firstName} {friend.lastName}</h3>
+                </div>
+            ))}
+            </div>
+        ) : (
+            <h3>Sorry you have no friends</h3>
+        )}
+            <div className="card"> 
+            <div className="card-img-top"/>
             <img src='https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1502&q=80'thumbnail/>
-            <div class="card-body">
-                <h5 class="card-title"> Person Name
+            <div className="card-body">
+                <h5 className="card-title"> Person Name
                     {/* {this.fullName} i.e. the friend's first and last name*/}
                 </h5>
                 <p>
