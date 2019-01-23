@@ -8,7 +8,7 @@ import Keys from "./pages/keys/Keys";
 import Login from "./pages/login/Login";
 import Friends from "./pages/authenticate/authenticate";
 import Home from "./pages/home/Home";
-import FriendsList from "./pages/friends/Friends";
+import FriendsList from "./pages/friends/friendStarter";
 import View from "./pages/view/View";
 import SearchOne from "./pages/searchOne/SearchOne";
 
