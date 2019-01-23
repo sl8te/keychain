@@ -78,8 +78,8 @@ class Keys extends Component {
                             <div>
                                 {this.state.keys.map(key => (
                                     <div className="card" key={key._id}>
-                                    <p>Account: {key.account}</p>
-                                    <p href={key.link} target="blank" id={key._id}>Username: {key.username}</p>
+                                    <strong className="keyItem">Account: {key.account}</strong>
+                                    <strong className="keyItem" href={key.link} target="blank" id={key._id}>Username: {key.username}</strong>
                                     <button type="button" className="btnKeyDelete btn btn-danger" onClick={() => this.handleDeleteKey(key._id)}>Delete</button>
                                     </div>
                                 ))}
