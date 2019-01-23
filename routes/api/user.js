@@ -5,15 +5,12 @@ const isAuthenticated = require("../../config/middleware/isAuthenticated");
 // Matches with "/api/users/"
 router
   .route("/:id")
-  // .get(/*isAuthenticated,*/userController.findOneUser)
-  .delete(/*isAuthenticated,*/userController.deleteUser)
-  // .route("/:id")
-  // .get(isAuthenticated, userController.findOneUser)
-
+  .delete(isAuthenticated, userController.deleteUser)
+  
 // Find all for users
 router
   .route("/")
-  .put(/*isAuthenticated,*/userController.editUser)
+  .put(isAuthenticated, userController.editUser)
   .post(userController.createUser)
 
 router
@@ -28,6 +25,6 @@ router
 
 router
     .route("/?")
-    .get(/*isAuthenticated,*/userController.findAll)
+    .get(isAuthenticated, userController.findAll)
 
   module.exports = router;

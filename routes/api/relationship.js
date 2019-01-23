@@ -1,18 +1,19 @@
 const router = require("express").Router();
 const relationshipController = require("../../controllers/relationshipController");
+const isAuthenticated = require("../../config/middleware/isAuthenticated");
 
 // Matches with "/api/relationships/"
 router
     .route("/")
     // add a friend request
-    .post(/*isAuthenticated,*/relationshipController.addFriendRequest)
-    .get(/*isAuthenticated,*/relationshipController.findAllFriends)
+    .post(isAuthenticated, relationshipController.addFriendRequest)
+    .get(isAuthenticated, relationshipController.findAllFriends)
 
 // Matches with "/api/relationships/:id"
 router
     .route("/:id")
-    .put(/*isAuthenticated,*/relationshipController.acceptFriend)
-    .delete(/*isAuthenticated,*/relationshipController.denyRequest)
+    .put(isAuthenticated, relationshipController.acceptFriend)
+    .delete(isAuthenticated, relationshipController.denyRequest)
     .get(relationshipController.checkFriendStatus)
 
 router
