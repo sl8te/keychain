@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 // import Fuse from "fuse.js";
 
 class Search extends Component {
@@ -34,7 +34,7 @@ class Search extends Component {
     }
 
     handleReturn = () => {        
-      window.location.assign("/authenticate");     
+      window.location.assign("/friends");     
     }
     
     handleAddFriend = id => {
@@ -43,7 +43,7 @@ class Search extends Component {
         userTwoId: id
       }).then(friendRequest => {
         console.log(friendRequest);
-        window.location.assign("/authenticate");
+        window.location.assign("/friends");
       })
     }
 
@@ -68,11 +68,12 @@ class Search extends Component {
           <br/>
           <div className="col-md-12">
             {this.state.users.length ? (
-              <div>
+              <div className="card">
                 {this.state.users.map(user => (
-                  <div className="card" key={user._id}>
-                      <p>{user.firstName} {user.lastName}</p>
-                      <button type="button" className="btnAdd btn-success" onClick={() => this.handleAddFriend(user._id)}>Add Friend</button>
+                  <div className="card-body" key={user._id}>
+                      <img className="friendImg" src={user.photoLink} />
+                      <strong className="friendName">{user.firstName} {user.lastName}</strong>
+                      <button type="button" className="btnAddfriend btn-success" onClick={() => this.handleAddFriend(user._id)}>Add Friend</button>
                   </div>
                 ))}
               </div>

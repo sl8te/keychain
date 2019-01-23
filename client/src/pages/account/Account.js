@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { FormErrors } from './FormErrors';
 import API from "../../utils/API";
+import { Col } from "../../components/Grid";
 // const bcrypt = require("bcrypt-nodejs");
 
 
@@ -96,7 +97,7 @@ class Account extends Component {
 
   handleCancel = () => {   
     API.editUser().then(res => {       
-      window.location.assign("/authenticate");
+      window.location.assign("/friends");
     });
   }
 
@@ -113,8 +114,10 @@ class Account extends Component {
     if(this.state.firstName) {
       return (
         <form className="accountForm">
-         <h1>Hello {this.state.firstName}</h1>         
+          <Col size="md-12 profileContent">
+         <h1>{this.state.firstName} {this.state.lastName}</h1>         
           <h2>Account Details</h2>
+          </Col>
           <div className="panel panel-default">
             <FormErrors formErrors={this.state.formErrors} />
           </div>

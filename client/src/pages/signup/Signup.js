@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { FormErrors } from './FormErrors';
+import { Col, Container } from "../../components/Grid";
 import API from "../../utils/API";
 
 class Signup extends Component {
@@ -89,57 +90,61 @@ class Signup extends Component {
 
   render () {
     return (
-      <form className="signupForm">
-        <h2>Sign up</h2>
-        <div className="panel panel-default">
-          <FormErrors formErrors={this.state.formErrors} />
-        </div>
-        <div className="col-md-8">
-          <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
-            <label htmlFor="email">Email address</label>
-            <input type="email" required className="form-control" name="email"
-              placeholder="Email" required
-              value={this.state.email}
-              onChange={this.handleUserInput}  autoFocus/>
-          </div>
-          <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
-            <label htmlFor="password">Password must contain at least 1 uppercase letter and be 6 to 10 characters long.</label>          
-            <input type="password" className="form-control" name="password"
-              placeholder="Password" required
-              value={this.state.password}
-              onChange={this.handleUserInput}  />
-          </div>
-          <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
-            <label htmlFor="confirmPassword">Confirm Password</label>          
-            <input type="password" className="form-control" name="confirmPassword"
-              placeholder="Confirm Password" required
-              value={this.state.confirmPassword}
-              onChange={this.handleUserInput}  />
-          </div>
-          <div className={'form-group'}>
-            <label htmlFor="firstName">First Name</label>
-            <input type="text" className="form-control" name="firstName"
-              placeholder="First Name" required
-              value={this.state.firstName}
-              onChange={this.handleUserInput}  />
-          </div>
-          <div className={'form-group'}>
-            <label htmlFor="lastName">Last Name</label>
-            <input type="text" className="form-control" name="lastName"
-              placeholder="Last Name" required
-              value={this.state.lastName}
-              onChange={this.handleUserInput}  />
-          </div>
-          <div className={'form-group'}>
-            <label htmlFor="photoLink">Link for profile photo</label>
-            <input type="text" className="form-control" name="photoLink"
-              placeholder="Optional" required
-              value={this.state.photoLink}
-              onChange={this.handleUserInput}  />
-          </div>  
-        </div>                
-        <button type="button" className="btn" disabled={!this.state.formValid} onClick={this.handleFormSubmit}>Sign up</button>
-      </form>
+      <Container>
+        <Col size="md-12" className="signUpContent">
+          <form className="signupForm">
+            <h2>Sign up</h2>
+            <div className="panel panel-default">
+              <FormErrors formErrors={this.state.formErrors} />
+            </div>
+            <div className="col-md-12">
+              <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
+                <label htmlFor="email">Email address</label>
+                <input type="email" required className="form-control" name="email"
+                  placeholder="Email" required
+                  value={this.state.email}
+                  onChange={this.handleUserInput}  autoFocus/>
+              </div>
+              <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
+                <label htmlFor="password">Password must contain at least 1 uppercase letter and be 6 to 10 characters long.</label>          
+                <input type="password" className="form-control" name="password"
+                  placeholder="Password" required
+                  value={this.state.password}
+                  onChange={this.handleUserInput}  />
+              </div>
+              <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
+                <label htmlFor="confirmPassword">Confirm Password</label>          
+                <input type="password" className="form-control" name="confirmPassword"
+                  placeholder="Confirm Password" required
+                  value={this.state.confirmPassword}
+                  onChange={this.handleUserInput}  />
+              </div>
+              <div className={'form-group'}>
+                <label htmlFor="firstName">First Name</label>
+                <input type="text" className="form-control" name="firstName"
+                  placeholder="First Name" required
+                  value={this.state.firstName}
+                  onChange={this.handleUserInput}  />
+              </div>
+              <div className={'form-group'}>
+                <label htmlFor="lastName">Last Name</label>
+                <input type="text" className="form-control" name="lastName"
+                  placeholder="Last Name" required
+                  value={this.state.lastName}
+                  onChange={this.handleUserInput}  />
+              </div>
+              <div className={'form-group'}>
+                <label htmlFor="photoLink">Link for profile photo</label>
+                <input type="text" className="form-control" name="photoLink"
+                  placeholder="Optional" required
+                  value={this.state.photoLink}
+                  onChange={this.handleUserInput}  />
+              </div>  
+              <button type="button" className="btn btnSignup" disabled={!this.state.formValid} onClick={this.handleFormSubmit}>Sign up</button>
+            </div>                
+          </form>
+        </Col>
+      </Container>
     )
   }
 }

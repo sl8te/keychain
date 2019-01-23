@@ -154,10 +154,31 @@ button {
     margin-right: 1%
 }
 
-.btnAccept, .btnDelete {
+.btnAccept, .btnDelete, .btnAddfriend {
     float: right
 }
 
 .friendName {
     margin-left: 1%
+}
+
+.componentTitle {
+    margin-top: 1%
+}
+
+.btnHome {
+    width: 98%
+}
+
+.accountForm {
+    width: 96%;
+    margin-left: 2%
+}
+
+.signUpContent, .signupForm {
+    width: 100%
+}
+
+.btnSignup {
+    width: 99%
 }
