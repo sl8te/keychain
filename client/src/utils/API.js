@@ -25,11 +25,11 @@ export default {
   findOneUser: function() {
     return axios.get("/api/users/me");
   },
+  editUser: function(editRes) {
+    return axios.put("/api/users/", editRes);
+  },
   findOtherUser: function(id) {
     return axios.get("/api/users/view/" + id);
-  },
-  editUser: function(id, editRes) {
-    return axios.put("/api/users/" + id, editRes);
   },
   deleteUser: function(id) {
     return axios.delete("/api/users/" + id);
@@ -38,8 +38,8 @@ export default {
   createUser: function(userData) {
     return axios.post("/api/users", userData);
   },
-  findAllUsers: function(userData) {
-    return axios.get("/api/users", userData);
+  findAllUsers: function() {
+    return axios.get("/api/users");
   },
   // =======================================
   // login routes
@@ -52,11 +52,11 @@ export default {
 
   //========================================
   // keychain all routes
-  addKey: function(keyData) {
-    return axios.post("/api/keychain", keyData);
+  addKey: function(id, keyData) {
+    return axios.post("/api/keychain/" + id, keyData);
   },
   findKeys: function(keyData) {
-    return axios.get("/api/keychain", keyData);
+    return axios.get("/api/keychain/", keyData);
   },
 
   // keychain id routes
@@ -67,7 +67,7 @@ export default {
     return axios.get("/api/keychain/" + id);
   },
   deleteKey: function(id) {
-    return axios.get("/api/keychain/" + id);
+    return axios.delete("/api/keychain/" + id);
   },
 
    //========================================

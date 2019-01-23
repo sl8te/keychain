@@ -7,9 +7,9 @@ import Account from "./pages/account/Account";
 import Keys from "./pages/keys/Keys";
 import Login from "./pages/login/Login";
 import Authenticate from "./pages/authenticate/authenticate";
-import API from "./utils/API";
 import Home from "./pages/home/Home";
 import View from "./pages/view/View";
+import SearchOne from "./pages/searchOne/SearchOne";
 
 function App() {
   return (
@@ -23,6 +23,7 @@ function App() {
           <Route exact path="/keys" component={Keys} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/authenticate" component={Authenticate} />
+          <Route exact path="/searchOne" component={SearchOne} />
           <Route exact path="/view/:id" component={View} />
           {/* <Route exact path="/friends" component={Friends} /> */}
           <Route component={NoMatch} />

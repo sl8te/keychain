@@ -6,7 +6,7 @@ module.exports = {
     // but good for testing the user creation process
     findAll: function(req, res) {
         db.User
-            .find({ $or:[{ firstName: req.body },{ lastName: req.body }]})
+            .find({})
             .then(dbUser => res.json(dbUser))
             .catch(err => res.status(422).json(err));
     },
@@ -14,6 +14,7 @@ module.exports = {
     findOneUser: function(req, res) {
         db.User
             .findOne(req.user._id)
+            .populate("keychains")
             .then(dbUser => res.json(dbUser))
             .catch(err => res.status(422).json(err));
     },
@@ -34,7 +35,7 @@ module.exports = {
     editUser: function(req, res) {
         console.log(req.body);
         db.User
-            .findOneAndUpdate({ _id: req.user.id }, req.body)
+            .findOneAndUpdate({ _id: req.user._id }, req.body)
             .then(dbUser => res.json(dbUser))
             .catch(err => res.status(422).json(err));
     },
