@@ -39,7 +39,10 @@ module.exports = {
     deleteKey: function(req, res) {
         db.Keychain
             .deleteOne({ _id: req.params.id })
-            .then(dbKeychain => res.json(dbKeychain))
+            .then(dbKeychain => {
+                console.log(dbKeychain);
+                res.json(dbKeychain);
+            })
             .catch(err => res.status(422).json(err));
     }
 };

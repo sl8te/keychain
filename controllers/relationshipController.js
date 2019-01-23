@@ -5,7 +5,7 @@ module.exports = {
     // finds all sent requests from the user
     findAllSentRequests: function(req, res) {
         db.Relationship
-        .find({ status: 0 , userOneId: req.user._id })
+        .find({ status: 2 , userOneId: req.user._id })
         .populate("userTwoId")
         .then(dbRelationship => {
             // console.log(dbRelationship);
@@ -15,7 +15,7 @@ module.exports = {
     // finds all received requests from the user
     findAllRecievedRequests: function(req, res) {
         db.Relationship
-        .find({ status: 0 , userTwoId: req.user._id })
+        .find({ status: 2 , userTwoId: req.user._id })
         .populate("userOneId")
         .then(dbRelationship => {
             // console.log(dbRelationship);
@@ -27,11 +27,11 @@ module.exports = {
         db.Relationship
             // this will test that the route works
             // this route will be a test to see if the user is friends with the other user
-            .find({ $and: [ { $or:[{ userOneId: req.user._id },{ userTwoId: req.user._id }]}, { $or: [{ userOneId: req.params.id }, { userTwoId: req.params.id } ] } ] } )
+            .find({ $and: [ { $or: [{ userOneId: req.user._id },{ userTwoId: req.user._id } ] }, { $or: [ { userOneId: req.params.id } , { userTwoId: req.params.id } ] } ] } )
             //.populate("userOneId")
             //.populate("userTwoId")
             .then(dbFriendShip => {
-                // console.log(dbFriendShip);
+                console.log(dbFriendShip);
                 res.json(dbFriendShip)
             })
             .catch(err => res.status(422).json(err));
@@ -98,7 +98,7 @@ module.exports = {
     acceptFriend: function(req, res) {
         console.log(req.body);
         db.Relationship
-            .findOneAndUpdate({ _id:req.params.id },{ status: 1 }, { new: true })
+            .findOneAndUpdate({ _id:req.params.id },{ status: "1" }, { new: true })
             .then(dbRelationship => res.json(dbRelationship))
             .catch(err => res.status(422).json(err));
     },

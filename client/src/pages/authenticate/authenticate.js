@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import { throws } from "assert";
-import {Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 
@@ -49,6 +49,7 @@ class Authenticate extends Component {
         // check if the data you're getting back has the properties you're looking for
         if(dbUser.data.firstName){
         // set state to fill what the user state is.  Will just add to state
+        console.log(dbUser.data);
         this.setState(dbUser.data);
       }
     })
@@ -70,11 +71,29 @@ class Authenticate extends Component {
     window.location.assign("/searchOne");
   }
 
+  handleAcceptFriend = (id) => {
+    API.acceptRequest(id)
+    .then(res => {
+      this.loadFriends();
+      this.loadRecieved();
+    })
+  }
+
+  handleDeleteFriend = (id) => {
+    API.deleteFriend(id)
+    .then(res => {
+      this.loadFriends();
+      this.loadSent();
+      this.loadRecieved();
+    })
+  }
+
   render() {
     // render desired page on the if statement
     if(this.state.firstName){
         return (
           <Container fluid>
+            <img className="UserPhoto" alt={this.state.firstName} src={this.state.photoLink} />
             <h1>Hello {this.state.firstName}</h1>
             <button className="btnHome" onClick={this.handleLogout}>Logout</button>
             <br/>
@@ -87,6 +106,7 @@ class Authenticate extends Component {
                   {this.state.friends.map(friend => (
                     <ListItem key={friend._id}>
                       <Link to={"/view/" + friend._id}>
+                        <img className="friendImg" src={friend.photoLink} alt={friend.firstName} />
                         <strong>
                           {friend.firstName} {friend.lastName}
                         </strong>
@@ -95,46 +115,49 @@ class Authenticate extends Component {
                   ))}
                 </List>
               ) : (
-                <h3>No friends to Display</h3>
+                <h3>Loading friends</h3>
               )}
             </Col>
             <Col size="md-12">
               <h2>Sent friend Requests</h2>
               {this.state.sent.length ? (
                 <List>
-                  {this.state.sent.map(friend => (
-                    <ListItem key={friend._id}>
-                      <Link to={"/view/" + friend._id}>
+                  {this.state.sent.map(sent => (
+                    <ListItem key={sent._id}>
+                    <img className="friendImg" src={sent.photoLink} alt={sent.firstName} />
                         <strong>
-                          {friend.userTwoId.firstName} {friend.userTwoId.lastName}
+                          {sent.userTwoId.firstName} {sent.userTwoId.lastName}
                         </strong>
-                      </Link>
+                        <button type="button" className="btnAccept btn-danger" onClick={() => this.handleDeleteFriend(sent._id)}>Delete Request</button>
                     </ListItem>
                   ))}
                 </List>
               ) : (
-                <h3>No Sent Requests at this moment in time</h3>
+                <h3>Loading Sent Requests</h3>
               )}
             </Col>
             <Col size="md-12">
               <h2>Recieved friend Requests</h2>
               {this.state.recieved.length ? (
                 <List>
-                  {this.state.recieved.map(friend => (
-                    <ListItem key={friend._id}>
+                  {this.state.recieved.map(request => (
+                    <ListItem key={request._id}>
+                    <img className="friendImg" src={request.photoLink} alt={request.firstName} />
                       <strong>
-                        {friend.userOneId.firstName} {friend.userOneId.lastName}
+                        {request.userOneId.firstName} {request.userOneId.lastName}
                       </strong>
-                    </ListItem>
+                      <button type="button" className="btnAccept btn-success" onClick={() => this.handleAcceptFriend(request._id)}>Accept</button>
+                      <button type="button" className="btnAccept btn-danger" onClick={() => this.handleDeleteFriend(request._id)}>Deny</button> 
+                    </ListItem> 
                   ))}
                 </List>
               ) : (
-                <h3>No recieved Requests at this moment in time</h3>
+                <h3>Waiting for Recieved Requests</h3>
               )}
             </Col>
             <br/>
             <br/>
-            <div class="searchBtn">
+            <div className="searchBtn">
               <button type="button" className="btnSearch" onClick={this.handleSearch}>Search for Friends</button>
             </div>
           </Container>
