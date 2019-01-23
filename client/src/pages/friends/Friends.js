@@ -79,24 +79,8 @@ render() {
         ) : (
             <h3>Sorry you have no friends</h3>
         )}
-            <div className="card"> 
-            <div className="card-img-top"/>
-            <img src='https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1502&q=80'thumbnail/>
-            <div className="card-body">
-                <h5 className="card-title"> Person Name
-                    {/* {this.fullName} i.e. the friend's first and last name*/}
-                </h5>
-                <p>
-                    Click the button to view
-                    {/* {this.fullName} */} 
-                    's keys.
-                </p>
-                <a href="" class="btn btn-primary">
-                    {/* {this.friendsKeychainLink} i.e. the link to friends keychain profile.*/}
-                </a>
-            </div>
-        </div>
-        </div>
+        
+         </div>
     </Container>
 
         );

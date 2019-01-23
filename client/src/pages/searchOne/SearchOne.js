@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
-import Fuse from "fuse.js";
+// import Fuse from "fuse.js";
 
 class Search extends Component {
     constructor (props) {
