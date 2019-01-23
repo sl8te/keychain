@@ -25,7 +25,6 @@ function App() {
           <Route exact path="/authenticate" component={Authenticate} />
           <Route exact path="/searchOne" component={SearchOne} />
           <Route exact path="/view/:id" component={View} />
-          {/* <Route exact path="/friends" component={Friends} /> */}
           <Route component={NoMatch} />
         </Switch>
       </div>
