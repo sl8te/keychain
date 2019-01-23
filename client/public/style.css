@@ -154,7 +154,7 @@ button {
     margin-right: 1%
 }
 
-.btnAccept, .btnDelete {
+.btnAccept, .btnDelete, .btnAddfriend {
     float: right
 }
 

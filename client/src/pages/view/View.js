@@ -69,15 +69,16 @@ class View extends Component {
         <button type="button" className="btnDelete btn-danger" onClick={() => this.handleDeleteFriend(this.state.friendStatus._id)}>Unfriend</button>
         <h1>{this.state.keyholder.firstName} {this.state.keyholder.lastName}'s Keychain</h1>
           {this.state.keys.length ? (
-            <List>
+            <div className="card">
               {this.state.keys.map(key => (
-                <ListItem key={key._id}>
-                  <strong>
+                <div className="card-body" key={key._id}>
+                  <img className="friendImg" src={key.photoLink} alt={key.firstName} />
+                  <strong className="friendName">
                     {key.account} {key.username}
                   </strong>
-                </ListItem>
+                </div>
               ))}
-            </List>
+            </div>
           ) : (
             <h3>{this.state.keyholder.firstName} does not have any keys</h3>
           )}

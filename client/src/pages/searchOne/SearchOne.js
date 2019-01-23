@@ -68,11 +68,12 @@ class Search extends Component {
           <br/>
           <div className="col-md-12">
             {this.state.users.length ? (
-              <div>
+              <div className="card">
                 {this.state.users.map(user => (
-                  <div className="card" key={user._id}>
-                      <p>{user.firstName} {user.lastName}</p>
-                      <button type="button" className="btnAdd btn-success" onClick={() => this.handleAddFriend(user._id)}>Add Friend</button>
+                  <div className="card-body" key={user._id}>
+                      <img className="friendImg" src={user.photoLink} />
+                      <strong className="friendName">{user.firstName} {user.lastName}</strong>
+                      <button type="button" className="btnAddfriend btn-success" onClick={() => this.handleAddFriend(user._id)}>Add Friend</button>
                   </div>
                 ))}
               </div>
