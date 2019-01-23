@@ -40,7 +40,6 @@
 
 .homePage{
     text-align: center;
-   
 }
 
 .btnHome{
@@ -61,6 +60,13 @@
 }
 .searchBtn{
     text-align: center;
+}
+.logo{
+    width: 50px;
+    height: auto;
+}
+.navbar-toggler-icon{
+    background-image: url("menu.png");
 }
 
 /* Specific Styling for Keys Page */
@@ -123,3 +129,10 @@ h3 {
     border-color: #3872d1;
 }
 /* =================================== */
+
+/* CSS for authenticate.js */
+.UserPhoto {
+    clip-path: circle(41.9% at 50% 50%);
+    width: 200px;
+    height: auto
+}

@@ -9,6 +9,7 @@ class Keys extends Component {
         platform: '',
         userName: '',
         profileLink: '',
+        user: '',
         keys: []
       }
     }
@@ -24,52 +25,90 @@ class Keys extends Component {
             // check if the data you're getting back has the properties you're looking for
             if(dbUser.data.firstName){
             // set state to fill what the user state is.  Will just add to state
-            this.setState(dbUser.data);
+            this.setState({ user: dbUser.data });
+            this.loadKeychain();
             }
         })
     }
 
+    handleUserInput = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        this.setState({[name]: value});
+      }
+
+    handleAddKey = (event) => {
+        event.preventDefault();
+        API.addKey(this.state.user._id, {
+            account: this.state.platform,
+            username: this.state.userName,
+            link: this.state.profileLink
+        }).then(result => {
+            // console.log(result);
+            this.loadKeychain();
+        })
+    }
+
+    loadKeychain = () => {
+        // will need to set another route for finding a user that is based on params.id
+        API.findOtherUser(this.state.user._id).then(dbKeychain => {
+            // console.log(dbKeychain);
+            this.setState({ keyholder: dbKeychain.data });
+            if (dbKeychain.data !== null ){
+              this.setState({ keys: dbKeychain.data.keychains });
+            }
+          }
+        )
+      }
+
+      handleDeleteKey = id => {
+          API.deleteKey(id)
+          .then(res => {
+              this.loadKeychain();
+          })
+      }
+
     render () {
-        if (this.state.firstName) {
+        if (this.state.user.firstName) {
         return (
                 <div className="container-fluid">
-                    <form className="Keys">
                     <br></br>
-                        <h2>{this.state.firstName}'s Keys</h2>
-                        <br></br>
-                        <div className="row">
-                            <div className= "key-wrapper">
-                                <div className="col-sm-8" id="key-list">
-                                    <p id="platform_name">Platform/App</p>
-                                    <p id="platform_username">Username</p>
-                                    <p id="platform_profile_link">Profile link</p>
-                                </div>
-                                <div className="col-sm-4" id="btn-wrapper">
-                                    <button type="button" class="btn btn-success" id="edit-btn">Edit</button> 
-                                    <button type="button" class="btn btn-danger" id="delete-btn">X</button> 
-                                </div>
+                        <h2>{this.state.user.firstName}'s Keys</h2>
+                        {this.state.keys.length ? (
+                            <div>
+                                {this.state.keys.map(key => (
+                                    <div className="card" key={key._id}>
+                                    <p>Account: {key.account}</p>
+                                    <p href={key.link} target="blank" id={key._id}>Username: {key.username}</p>
+                                    <button type="button" className="btnKeyDelete btn btn-danger" onClick={() => this.handleDeleteKey(key._id)}>Delete</button>
+                                    </div>
+                                ))}
                             </div>
-                        </div>
+                        ) : (
+                            <h3>No keys to display</h3>
+                        )}
                         <br></br>
+                        <br></br>
+                    <form className="Keys">
                         <h3>Add A Key</h3>
                             <br></br>
                         <div className="row" id="add-key">
                             <div className="col-sm-9">
                             <div className={'form-group'}>
                                 <label htmlFor="platform">Platform/App</label>
-                                <input type="text" className="form-control" name="platform" placeholder="Xbox One"/>
+                                <input type="text" className="form-control" name="platform" value={this.state.platform} onChange={this.handleUserInput} placeholder="Xbox One"/>
                             </div>
                             <div className={'form-group'}>
                                 <label htmlFor="userName">User Name</label>
-                                <input type="text" className="form-control" name="userName" placeholder="Halo_Addict2099"/>
+                                <input type="text" className="form-control" name="userName" value={this.state.userName} onChange={this.handleUserInput} placeholder="Halo_Addict2099"/>
                             </div>
                             <div className={'form-group'}>
                                 <label htmlFor="profileLink">Profile Link (optional)</label>
-                                <input type="text" className="form-control" name="profileLink" placeholder="Profile Link"/>
+                                <input type="text" className="form-control" name="profileLink" value={this.state.link} onChange={this.handleUserInput} placeholder="Profile Link"/>
                             </div>
                             </div>
                             <div className="col-sm-3">
-                                <button type="button" class="btn btn-primary" id="submit-btn">Submit</button> 
+                                <button type="button" className="btn btn-primary" id="submit-btn" onClick={this.handleAddKey}>Submit</button> 
                             </div>
                         </div>
                     </form>

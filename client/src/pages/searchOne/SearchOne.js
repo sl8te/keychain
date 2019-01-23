@@ -1,15 +1,23 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
+// import Fuse from "fuse.js";
 
 class Search extends Component {
     constructor (props) {
       super(props);   
       this.state = {
-        search: ""
-      }         
+        search: "",
+        users: [],
+        user: ''
+      }        
     }
-  
+    
+    componentDidMount() {
+      this.handleSearch();
+      this.checkAuth();
+    }
+
     handleUserInput = (e) => {
       const name = e.target.name;
       const value = e.target.value;
@@ -19,8 +27,7 @@ class Search extends Component {
     };    
 
     handleSearch = () => {
-      console.log(this.state.search);
-      API.findAllUsers(this.state.search)      
+      API.findAllUsers()      
       .then(res => {
         console.log(res.data);
         this.setState({ users: res.data })})
@@ -29,27 +36,61 @@ class Search extends Component {
     handleReturn = () => {        
       window.location.assign("/authenticate");     
     }
-  
-    render () {              
+    
+    handleAddFriend = id => {
+      API.addFriend({
+        userOneId: this.state.user._id,
+        userTwoId: id
+      }).then(friendRequest => {
+        console.log(friendRequest);
+        window.location.assign("/authenticate");
+      })
+    }
+
+    // defining check auth
+  checkAuth = () => {
+    // api call to find the user using our cookie information
+    API.findOneUser().then(dbUser => {
+        // check if the data you're getting back has the properties you're looking for
+        if(dbUser.data.firstName){
+        // set state to fill what the user state is.  Will just add to state
+        console.log(dbUser.data);
+        this.setState({ user: dbUser.data});
+      }
+    })
+  }
+
+    render () {
+      if(this.state.user.firstName){
       return (
         <form className="searchForm">
-          <h2>Search for Friends</h2>          
-          <div className="col-md-8">
-            <label htmlFor="search">Search and add Friends!</label>
-            <input type="text" required className="form-control" name="search"
-              placeholder="Friend's Name"             
-              onChange={this.handleUserInput}  />
-          </div>          
+          <h2>User Directory</h2>          
           <br/>
-          <button type="button" className="btnHome" onClick={this.handleSearch}>Search</button>          
-          <br/>
-          <br/>
-          <br/>
+          <div className="col-md-12">
+            {this.state.users.length ? (
+              <div>
+                {this.state.users.map(user => (
+                  <div className="card" key={user._id}>
+                      <p>{user.firstName} {user.lastName}</p>
+                      <button type="button" className="btnAdd btn-success" onClick={() => this.handleAddFriend(user._id)}>Add Friend</button>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <h3>Cannot find this specific user</h3>
+            )}
+          </div>
           <p>Return to account page</p>
           <button type="button" className="btnHome" onClick={this.handleReturn}>Return</button>
         </form>
-        )
-      }
+          )
+        }
+        else {
+          return (
+            <h1>Must be logged in to view this page.  You may do so <a href="/login">here</a>.</h1>
+          )
+        }
+      } 
     }
   
   
