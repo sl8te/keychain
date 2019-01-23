@@ -66,15 +66,23 @@ class View extends Component {
       if(this.state.user.firstName) {
         return (  
         <Container>
-        <button type="button" className="btnDelete btn-danger" onClick={() => this.handleDeleteFriend(this.state.friendStatus._id)}>Unfriend</button>
-        <h1>{this.state.keyholder.firstName} {this.state.keyholder.lastName}'s Keychain</h1>
+          <Col size="md-12 profileContent">
+          <img className="UserPhoto" alt={this.state.keyholder.firstName} src={this.state.keyholder.photoLink} />
+          <h1>{this.state.keyholder.firstName} {this.state.keyholder.lastName}'s Keychain</h1>
+          </Col>
+          <br/>
+          <button type="button" className="btnUnfriend btn-danger" onClick={() => this.handleDeleteFriend(this.state.friendStatus._id)}>Unfriend</button>
+          <br />
           {this.state.keys.length ? (
             <div className="card">
               {this.state.keys.map(key => (
                 <div className="card-body" key={key._id}>
-                  <img className="friendImg" src={key.photoLink} alt={key.firstName} />
-                  <strong className="friendName">
-                    {key.account} {key.username}
+                  <strong>
+                    Platform: {key.account} 
+                  </strong>
+                  <br />
+                  <strong>
+                    Username: {key.username}
                   </strong>
                 </div>
               ))}

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 // import Fuse from "fuse.js";
 
 class Search extends Component {
@@ -34,7 +34,7 @@ class Search extends Component {
     }
 
     handleReturn = () => {        
-      window.location.assign("/authenticate");     
+      window.location.assign("/friends");     
     }
     
     handleAddFriend = id => {
@@ -43,7 +43,7 @@ class Search extends Component {
         userTwoId: id
       }).then(friendRequest => {
         console.log(friendRequest);
-        window.location.assign("/authenticate");
+        window.location.assign("/friends");
       })
     }
 
