@@ -27,7 +27,18 @@ app.use(passport.session());
 app.use(routes);
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/keychain", { useNewUrlParser: true });
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/keychain", { useNewUrlParser: true });
+
+//database configuration with mongoose
+var databaseUri = "mongodb://localhost/keychain";
+
+  if (process.env.MONGODB_URI){
+    mongoose.connect(process.env.MONGODB_URI);
+  }
+  else {
+    mongoose.connect(databaseUri);
+  };
+
 
 // Start the API server
 app.listen(PORT, function() {
