@@ -13,7 +13,6 @@ router
 // Find all for users
 router
   .route("/")
-  .get(/*isAuthenticated,*/userController.findAll)
   .put(/*isAuthenticated,*/userController.editUser)
   .post(userController.createUser)
 
@@ -26,5 +25,9 @@ router
 router
   .route("/view/:id")
   .get(userController.findOtherUser)
+
+router
+    .route("/?")
+    .get(/*isAuthenticated,*/userController.findAll)
 
   module.exports = router;

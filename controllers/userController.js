@@ -6,8 +6,7 @@ module.exports = {
     // but good for testing the user creation process
     findAll: function(req, res) {
         db.User
-            console.log(req.body)
-            .find({ $or:[{ firstName: req.body },{ lastName: req.body }]})
+            .find({})
             .then(dbUser => res.json(dbUser))
             .catch(err => res.status(422).json(err));
     },

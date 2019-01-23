@@ -38,8 +38,8 @@ export default {
   createUser: function(userData) {
     return axios.post("/api/users", userData);
   },
-  findAllUsers: function(userData) {
-    return axios.get("/api/users", userData);
+  findAllUsers: function() {
+    return axios.get("/api/users");
   },
   // =======================================
   // login routes
