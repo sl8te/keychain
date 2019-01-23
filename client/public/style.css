@@ -40,7 +40,6 @@
 
 .homePage{
     text-align: center;
-   
 }
 
 .btnHome{
@@ -123,3 +122,10 @@ h3 {
     border-color: #3872d1;
 }
 /* =================================== */
+
+/* CSS for authenticate.js */
+.UserPhoto {
+    clip-path: circle(41.9% at 50% 50%);
+    width: 200px;
+    height: auto
+}

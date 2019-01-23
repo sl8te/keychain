@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import { List, ListItem } from "../../components/List";
 import { Container, Row, Col } from "../../components/Grid";
+import Nav from "../../components/Nav";
 
 class View extends Component {
     constructor (props) {
@@ -11,7 +12,7 @@ class View extends Component {
         keys: [],
         friends: [],
         user: '',
-        friendStatus: ''
+        friendStatus: []
       }      
     }  
 
@@ -34,27 +35,39 @@ class View extends Component {
 
     checkFriendship = () => {
       API.checkFriendStatus(this.props.match.params.id).then(dbFriendship => {
-          console.log(dbFriendship.data);
-          this.setState({ friendStatus: dbFriendship.data.status });
+          if(dbFriendship.data){
+          this.setState({ friendStatus: dbFriendship.data[0] });
+          // console.log(this.state.friendStatus)
+          }
       })
     }
 
     loadKeychain = () => {
-      console.log(this.props.match.params.id);
       // will need to set another route for finding a user that is based on params.id
       API.findOtherUser(this.props.match.params.id).then(dbKeychain => {
-          console.log(dbKeychain.data);
-          console.log(dbKeychain.data.keychains);
+          // console.log(dbKeychain);
           this.setState({ keyholder: dbKeychain.data });
-          this.setState({ keys: dbKeychain.data.keychains });
+          if (dbKeychain.data !== null ){
+            this.setState({ keys: dbKeychain.data.keychains });
+          }
         }
       )
     }
 
+    handleDeleteFriend = id => {
+      API.deleteFriend(id)
+      .then(res => {
+        window.location.assign("/authenticate")
+      })
+    }
+
     render () {
+      // this if statement will check if the user exists
+      // Add additional conditional statement "&& this.state.friendStatus" between these
       if(this.state.user.firstName) {
-        return (   
+        return (  
         <Container>
+        <button type="button" className="btnDelete btn-danger" onClick={() => this.handleDeleteFriend(this.state.friendStatus._id)}>Unfriend</button>
         <h1>{this.state.keyholder.firstName} {this.state.keyholder.lastName}'s Keychain</h1>
           {this.state.keys.length ? (
             <List>
@@ -67,9 +80,17 @@ class View extends Component {
               ))}
             </List>
           ) : (
-            <h3>{this.state.user.firstName} does not have any keys</h3>
+            <h3>{this.state.keyholder.firstName} does not have any keys</h3>
           )}
         </Container>
+        )
+      }
+      else if(this.state.user.firstName && (this.state.friendStatus.status == "2" && this.state.friendStatus.userOneId == this.state.user._id))  {
+        return (
+          <Container>
+            <h1>{this.state.keyholder.firstName} {this.state.keyholder.lastName} has not responded to your friend request.  Check again later</h1>
+            <button className="btn btn-danger">Delete Request</button>
+          </Container>
         )
       }
       else {
