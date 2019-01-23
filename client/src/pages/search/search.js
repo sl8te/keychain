@@ -32,18 +32,22 @@ class Search extends Component {
     render() {
         return (
             <Container fluid>
-                <form>
-                    <Input
-                    value={this.state.search}
-                    onChange={this.handleInputChange}
-                    name="seach bar"
-                    />
-                    <FormBtn
-                    disabled={!this.state.search}
-                    onClick={this.handleFormSubmit}
-                    >Submit
-                    </FormBtn>
-                </form>
+                <form className="searchForm">
+          <h2>Search for Friends</h2>          
+          <div className="col-md-8">
+            <label htmlFor="search">Search and add Friends!</label>
+            <input type="text" required className="form-control" name="search"
+              placeholder="Friend's Name"             
+              onChange={this.handleUserInput}  />
+          </div>          
+          <br/>
+          <button type="button" className="btnHome" onClick={this.handleSearch}>Search</button>          
+          <br/>
+          <br/>
+          <br/>
+          <p>Return to account page</p>
+          <button type="button" className="btnHome" onClick={this.handleReturn}>Return</button>
+        </form>
                 <List>
                     {/* here is where our results will show */}
                 </List>
