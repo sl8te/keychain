@@ -93,6 +93,7 @@ class Authenticate extends Component {
     if(this.state.firstName){
         return (
           <Container fluid>
+            <img className="UserPhoto" alt={this.state.firstName} src={this.state.photoLink} />
             <h1>Hello {this.state.firstName}</h1>
             <button className="btnHome" onClick={this.handleLogout}>Logout</button>
             <br/>
@@ -105,6 +106,7 @@ class Authenticate extends Component {
                   {this.state.friends.map(friend => (
                     <ListItem key={friend._id}>
                       <Link to={"/view/" + friend._id}>
+                        <img className="friendImg" src={friend.photoLink} alt={friend.firstName} />
                         <strong>
                           {friend.firstName} {friend.lastName}
                         </strong>
@@ -122,6 +124,7 @@ class Authenticate extends Component {
                 <List>
                   {this.state.sent.map(sent => (
                     <ListItem key={sent._id}>
+                    <img className="friendImg" src={sent.photoLink} alt={sent.firstName} />
                         <strong>
                           {sent.userTwoId.firstName} {sent.userTwoId.lastName}
                         </strong>
@@ -139,6 +142,7 @@ class Authenticate extends Component {
                 <List>
                   {this.state.recieved.map(request => (
                     <ListItem key={request._id}>
+                    <img className="friendImg" src={request.photoLink} alt={request.firstName} />
                       <strong>
                         {request.userOneId.firstName} {request.userOneId.lastName}
                       </strong>
