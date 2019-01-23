@@ -61,6 +61,13 @@
 .searchBtn{
     text-align: center;
 }
+.logo{
+    width: 50px;
+    height: auto;
+}
+.navbar-toggler-icon{
+    background-image: url("menu.png");
+}
 
 /* Specific Styling for Keys Page */
 /* ================================= */
