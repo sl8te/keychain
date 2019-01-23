@@ -52,11 +52,11 @@ export default {
 
   //========================================
   // keychain all routes
-  addKey: function(keyData) {
-    return axios.post("/api/keychain", keyData);
+  addKey: function(id, keyData) {
+    return axios.post("/api/keychain/" + id, keyData);
   },
   findKeys: function(keyData) {
-    return axios.get("/api/keychain", keyData);
+    return axios.get("/api/keychain/", keyData);
   },
 
   // keychain id routes
@@ -67,7 +67,7 @@ export default {
     return axios.get("/api/keychain/" + id);
   },
   deleteKey: function(id) {
-    return axios.get("/api/keychain/" + id);
+    return axios.delete("/api/keychain/" + id);
   },
 
    //========================================

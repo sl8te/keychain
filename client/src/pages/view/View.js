@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import { List, ListItem } from "../../components/List";
 import { Container, Row, Col } from "../../components/Grid";
+import Nav from "../../components/Nav";
 
 class View extends Component {
     constructor (props) {
@@ -36,7 +37,7 @@ class View extends Component {
       API.checkFriendStatus(this.props.match.params.id).then(dbFriendship => {
           if(dbFriendship.data){
           this.setState({ friendStatus: dbFriendship.data[0] });
-          console.log(this.state.friendStatus)
+          // console.log(this.state.friendStatus)
           }
       })
     }
@@ -44,7 +45,7 @@ class View extends Component {
     loadKeychain = () => {
       // will need to set another route for finding a user that is based on params.id
       API.findOtherUser(this.props.match.params.id).then(dbKeychain => {
-          console.log(dbKeychain);
+          // console.log(dbKeychain);
           this.setState({ keyholder: dbKeychain.data });
           if (dbKeychain.data !== null ){
             this.setState({ keys: dbKeychain.data.keychains });
@@ -64,7 +65,7 @@ class View extends Component {
       // this if statement will check if the user exists
       // Add additional conditional statement "&& this.state.friendStatus" between these
       if(this.state.user.firstName) {
-        return (   
+        return (  
         <Container>
         <button type="button" className="btnDelete btn-danger" onClick={() => this.handleDeleteFriend(this.state.friendStatus._id)}>Unfriend</button>
         <h1>{this.state.keyholder.firstName} {this.state.keyholder.lastName}'s Keychain</h1>

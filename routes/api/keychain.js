@@ -8,13 +8,12 @@ router
   .get(/*isAuthenticated,*/keychainController.findOneKey)
   .put(/*isAuthenticated,*/keychainController.editKey)
   .delete(/*isAuthenticated,*/keychainController.deleteKey)
+  .post(/*isAuthenticated,*/keychainController.createKey)
   // .route("/:id")
-  // .get(isAuthenticated, userController.findOneUser)
 
 // Find all for users
 router
   .route("/")
   .get(/*isAuthenticated,*/keychainController.findAll)
-  .post(/*isAuthenticated,*/keychainController.createKey)
 
   module.exports = router;

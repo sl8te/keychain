@@ -14,6 +14,7 @@ module.exports = {
     findOneUser: function(req, res) {
         db.User
             .findOne(req.user._id)
+            .populate("keychains")
             .then(dbUser => res.json(dbUser))
             .catch(err => res.status(422).json(err));
     },
