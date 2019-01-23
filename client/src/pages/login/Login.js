@@ -38,7 +38,7 @@ class Login extends Component {
       // check for user
       if (this.state.user) {
         // If the user exists, redirect to your desired page
-        return <Redirect to="/authenticate" user={this.state.user} />
+        return <Redirect to="/friends" user={this.state.user} />
       } else {
       // we need to have the ability for the user to log in  
       return (

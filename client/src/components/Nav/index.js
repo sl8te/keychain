@@ -17,7 +17,7 @@ function Nav() {
             <Link className="nav-link navbar-brand" to="/searchOne">User Directory<span class="sr-only">(current)</span></Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link navbar-brand" to="/authenticate">Friends</Link>
+            <Link className="nav-link navbar-brand" to="/friends">Friends</Link>
           </li>
           <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle navbar-brand" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

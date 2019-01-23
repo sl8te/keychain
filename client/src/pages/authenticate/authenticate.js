@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 
-class Authenticate extends Component {
+class Friends extends Component {
   // Setting the component's initial state
   state = {
     sent: [],
@@ -31,14 +31,20 @@ class Authenticate extends Component {
   loadSent = () => {
     API.findAllSentRequests()
       // need to preserve all of the data, but only need to show on screen the OTHER user
-      .then(res => this.setState({ sent: res.data }))
+      .then(res => {
+        console.log(res.data);
+        this.setState({ sent: res.data })
+      })
       .catch(err => console.log(err));
   }
 
   loadRecieved = () => {
     API.findAllRecievedRequests()
       // need to preserve all of the data, but only need to show on screen the OTHER user
-      .then(res => this.setState({ recieved: res.data }))
+      .then(res => {
+        console.log(res.data);
+        this.setState({ recieved: res.data })
+      })
       .catch(err => console.log(err));
   }
   
@@ -93,27 +99,26 @@ class Authenticate extends Component {
     if(this.state.firstName){
         return (
           <Container fluid>
-            <img className="UserPhoto" alt={this.state.firstName} src={this.state.photoLink} />
-            <h1>Hello {this.state.firstName}</h1>
-            <button className="btnHome" onClick={this.handleLogout}>Logout</button>
-            <br/>
-            <br/>
-            <button className="btnHome" onClick={this.handleEdit}>Edit Account</button>
+            <Col size="md-12 profileContent">
+              <img className="UserPhoto" alt={this.state.firstName} src={this.state.photoLink} />
+              <h1>Hello {this.state.firstName}</h1>
+              <br/>
+            </Col>
             <Col size="md-12">
               <h2>Friends List</h2>
               {this.state.friends.length ? (
-                <List>
+                <div className="card">
                   {this.state.friends.map(friend => (
-                    <ListItem key={friend._id}>
+                    <div className="card-body" key={friend._id}>
                       <Link to={"/view/" + friend._id}>
                         <img className="friendImg" src={friend.photoLink} alt={friend.firstName} />
-                        <strong>
+                        <strong className="friendName">
                           {friend.firstName} {friend.lastName}
                         </strong>
                       </Link>
-                    </ListItem>
+                    </div>
                   ))}
-                </List>
+                </div>
               ) : (
                 <h3>Loading friends</h3>
               )}
@@ -121,17 +126,17 @@ class Authenticate extends Component {
             <Col size="md-12">
               <h2>Sent friend Requests</h2>
               {this.state.sent.length ? (
-                <List>
+                <div className="card">
                   {this.state.sent.map(sent => (
-                    <ListItem key={sent._id}>
-                    <img className="friendImg" src={sent.photoLink} alt={sent.firstName} />
-                        <strong>
+                    <div className="card-body" key={sent._id}>
+                    <img className="friendImg" src={sent.userTwoId.photoLink} alt={sent.userTwoId.firstName} />
+                        <strong className="friendName">
                           {sent.userTwoId.firstName} {sent.userTwoId.lastName}
                         </strong>
-                        <button type="button" className="btnAccept btn-danger" onClick={() => this.handleDeleteFriend(sent._id)}>Delete Request</button>
-                    </ListItem>
+                        <button type="button" className="btnDelete btn-danger" onClick={() => this.handleDeleteFriend(sent._id)}>Delete Request</button>
+                    </div>
                   ))}
-                </List>
+                </div>
               ) : (
                 <h3>Loading Sent Requests</h3>
               )}
@@ -139,18 +144,18 @@ class Authenticate extends Component {
             <Col size="md-12">
               <h2>Recieved friend Requests</h2>
               {this.state.recieved.length ? (
-                <List>
+                <div className="card">
                   {this.state.recieved.map(request => (
-                    <ListItem key={request._id}>
-                    <img className="friendImg" src={request.photoLink} alt={request.firstName} />
-                      <strong>
+                    <div className="card-body" key={request._id}>
+                    <img className="friendImg" src={request.userOneId.photoLink} alt={request.userOneId.firstName} />
+                      <strong className="friendName">
                         {request.userOneId.firstName} {request.userOneId.lastName}
                       </strong>
-                      <button type="button" className="btnAccept btn-success" onClick={() => this.handleAcceptFriend(request._id)}>Accept</button>
-                      <button type="button" className="btnAccept btn-danger" onClick={() => this.handleDeleteFriend(request._id)}>Deny</button> 
-                    </ListItem> 
+                      <button type="button" className="btnDelete btn-danger" onClick={() => this.handleDeleteFriend(request._id)}>Deny</button> 
+                      <button type="button" className="btnAccept btn-success" onClick={() => this.handleAcceptFriend(request._id)}>Accept</button> 
+                    </div> 
                   ))}
-                </List>
+                </div>
               ) : (
                 <h3>Waiting for Recieved Requests</h3>
               )}
@@ -158,7 +163,7 @@ class Authenticate extends Component {
             <br/>
             <br/>
             <div className="searchBtn">
-              <button type="button" className="btnSearch" onClick={this.handleSearch}>Search for Friends</button>
+              <button className="btnHome" onClick={this.handleLogout}>Logout</button>
             </div>
           </Container>
         )
@@ -172,4 +177,4 @@ class Authenticate extends Component {
   }
 }
 
-export default Authenticate;
+export default Friends;
