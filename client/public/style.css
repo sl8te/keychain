@@ -169,3 +169,16 @@ button {
 .btnHome {
     width: 98%
 }
+
+.accountForm {
+    width: 96%;
+    margin-left: 2%
+}
+
+.signUpContent, .signupForm {
+    width: 100%
+}
+
+.btnSignup {
+    width: 99%
+}
