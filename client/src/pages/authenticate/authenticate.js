@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 
-class Authenticate extends Component {
+class Friends extends Component {
   // Setting the component's initial state
   state = {
     sent: [],
@@ -177,4 +177,4 @@ class Authenticate extends Component {
   }
 }
 
-export default Authenticate;
+export default Friends;

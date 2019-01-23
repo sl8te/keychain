@@ -6,8 +6,9 @@ import Signup from "./pages/signup/Signup";
 import Account from "./pages/account/Account";
 import Keys from "./pages/keys/Keys";
 import Login from "./pages/login/Login";
-import Authenticate from "./pages/authenticate/authenticate";
+import Friends from "./pages/authenticate/authenticate";
 import Home from "./pages/home/Home";
+import FriendsList from "./pages/friends/Friends";
 import View from "./pages/view/View";
 import SearchOne from "./pages/searchOne/SearchOne";
 
@@ -22,7 +23,9 @@ function App() {
           <Route exact path="/account" component={Account} />
           <Route exact path="/keys" component={Keys} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/authenticate" component={Authenticate} />
+          <Route exact path="/friends" component={Friends} />
+          {/* <Route exact path="/friends" component={FriendsList}/> */}
+          {/* <Route exact path="/view" component={View} /> */}
           <Route exact path="/searchOne" component={SearchOne} />
           <Route exact path="/view/:id" component={View} />
           {/* <Route exact path="/friends" component={Friends} /> */}
