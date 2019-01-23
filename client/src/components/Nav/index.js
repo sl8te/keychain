@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 function Nav() {
   return (
     <nav className="navbar navbar-expand-lg">
+    <img className="logo" src={'../keychainLogo.png'} />
       <Link className="navbar-brand" to="/">
         Keychain
       </Link>
