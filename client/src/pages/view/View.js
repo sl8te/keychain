@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import { List, ListItem } from "../../components/List";
 import { Container, Row, Col } from "../../components/Grid";
-import Nav from "../../components/Nav";
 
 class View extends Component {
     constructor (props) {
