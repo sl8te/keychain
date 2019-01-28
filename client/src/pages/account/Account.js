@@ -14,7 +14,8 @@ class Account extends Component {
       confirmPassword: '',
       firstName: '',
       lastName: '',
-      photoLink: '',     
+      photoLink: '',
+      user: '',     
       formErrors: {password: '', confirmPassword: ''},     
       passwordValid: false,
       confirmPasswordValid: false,
@@ -76,24 +77,22 @@ class Account extends Component {
       // check if the data you're getting back has the properties you're looking for
       if(dbUser.data.firstName){
       // set state to fill what the user state is.  Will just add to state
-      this.setState(dbUser.data);
+      this.setState({ user:dbUser.data });
     }
   })
   }
 
   handleFormSubmit = event => {
     event.preventDefault();
-    console.log(`{ password: ${this.state.password}, firstName: ${this.state.firstName}, lastName: ${this.state.lastName} }`);
+    // console.log(`{ password: ${this.state.password}, firstName: ${this.state.firstName}, lastName: ${this.state.lastName} }`);
     API.editUser({
-      // password: this.state.passwordValid,
-      // password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null),
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       photoLink: this.state.photoLink
     })
     .then( result => {
       console.log(result);
-      window.location.assign("/login");
+      window.location.assign("/friends");
     })    
   }
 
@@ -103,17 +102,15 @@ class Account extends Component {
     });
   }
 
-  // deleteItem = event => {
-  //   event.preventDefault();
-  //   API.deleteUser({
-
-  //   }).then( result => {
-  //     window.location.assign("/");
-  //   })
-  // } 
+  deleteItem = id => {
+    console.log(id);
+    API.deleteUser(id).then(result => {
+      window.location.assign("/");
+    })
+  } 
   
   render () {
-    if(this.state.firstName) {
+    if(this.state.user.firstName) {
       return (
         <form className="accountForm">
           <Col size="md-12 profileContent">
@@ -168,7 +165,7 @@ class Account extends Component {
           <br/>
           <br/>
           {/* <button type="submit" className="btn btn-danger" >Delete Account</button> */}
-          <button className="deleteBTN" onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) this.deleteItem(e) } }>
+          <button className="deleteBTN" onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) this.deleteItem(this.state.user._id) } }>
                 Delete Account</button>
         </form>
       )

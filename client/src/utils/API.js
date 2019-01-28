@@ -32,6 +32,7 @@ export default {
     return axios.get("/api/users/view/" + id);
   },
   deleteUser: function(id) {
+    console.log(id);
     return axios.delete("/api/users/" + id);
   },
   // user all routes
