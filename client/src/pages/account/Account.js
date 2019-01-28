@@ -13,7 +13,8 @@ class Account extends Component {
       isChanging: false,
       confirmPassword: '',
       firstName: '',
-      lastName: '',     
+      lastName: '',
+      photoLink: '',     
       formErrors: {password: '', confirmPassword: ''},     
       passwordValid: false,
       confirmPasswordValid: false,
@@ -87,7 +88,8 @@ class Account extends Component {
       // password: this.state.passwordValid,
       // password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null),
       firstName: this.state.firstName,
-      lastName: this.state.lastName
+      lastName: this.state.lastName,
+      photoLink: this.state.photoLink
     })
     .then( result => {
       console.log(result);
