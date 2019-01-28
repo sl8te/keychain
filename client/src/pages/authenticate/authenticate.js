@@ -32,7 +32,6 @@ class Friends extends Component {
     API.findAllSentRequests()
       // need to preserve all of the data, but only need to show on screen the OTHER user
       .then(res => {
-        console.log(res.data);
         this.setState({ sent: res.data })
       })
       .catch(err => console.log(err));
@@ -42,7 +41,6 @@ class Friends extends Component {
     API.findAllRecievedRequests()
       // need to preserve all of the data, but only need to show on screen the OTHER user
       .then(res => {
-        console.log(res.data);
         this.setState({ recieved: res.data })
       })
       .catch(err => console.log(err));
@@ -55,7 +53,6 @@ class Friends extends Component {
         // check if the data you're getting back has the properties you're looking for
         if(dbUser.data.firstName){
         // set state to fill what the user state is.  Will just add to state
-        console.log(dbUser.data);
         this.setState(dbUser.data);
       }
     })
@@ -64,7 +61,6 @@ class Friends extends Component {
   handleLogout = () => {
     // console.log("attempting to log out");
     API.logoutUser().then(res => { 
-      console.log(res);
       window.location.assign("/");
     });
   }

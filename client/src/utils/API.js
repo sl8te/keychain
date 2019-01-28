@@ -32,7 +32,6 @@ export default {
     return axios.get("/api/users/view/" + id);
   },
   deleteUser: function(id) {
-    console.log(id);
     return axios.delete("/api/users/" + id);
   },
   // user all routes
@@ -97,4 +96,10 @@ export default {
   deleteFriend: function(id) {
     return axios.delete("/api/relationships/" + id);
   },
+  userOneDelete: function(id) {
+    return axios.delete("/api/relationships/userOne/" + id);
+  },
+  userTwoDelete: function(id) {
+    return axios.delete("/api/relationships/userTwo/" + id);
+  }
 };

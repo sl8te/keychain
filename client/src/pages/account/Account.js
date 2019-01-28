@@ -52,7 +52,6 @@ class Account extends Component {
           confirmPasswordValid = false;
           fieldValidationErrors.confirmPassword = " does not match!";
         }
-        console.log(confirmPasswordValid);
         break;
       default:
         break;
@@ -91,7 +90,6 @@ class Account extends Component {
       photoLink: this.state.photoLink
     })
     .then( result => {
-      console.log(result);
       window.location.assign("/friends");
     })    
   }
@@ -103,11 +101,24 @@ class Account extends Component {
   }
 
   deleteItem = id => {
-    console.log(id);
     API.deleteUser(id).then(result => {
+      this.handleUserOneDelete(id);
+      this.handleUserTwoDelete(id);
       window.location.assign("/");
     })
   } 
+
+  handleUserOneDelete = id => {
+    // console.log(id);
+    API.userOneDelete(id).then(result =>
+      console.log(result + "1"))
+  }
+
+  handleUserTwoDelete = id => {
+    // console.log(id);
+    API.userTwoDelete(id).then(result =>
+      console.log(result + "2"))
+  }
   
   render () {
     if(this.state.user.firstName) {
