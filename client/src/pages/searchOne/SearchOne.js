@@ -70,18 +70,23 @@ class Search extends Component {
       );
       return (
         <div>
-          <form className="form-inline my-2 my-lg-0">
-            <input 
-            className="form-control mr-sm-2"
-            type="search" 
-            name="search" 
-            value={this.state.search} 
-            placeholder="Search" 
-            aria-label="Search" 
-            onChange={this.handleInputChange}
-            />
-          </form>
+            <br/>
             <h2>User Directory</h2>          
+            <br/>
+            <div className="col-md-12">
+            <br/>
+              <form>
+                <input 
+                className="form-control"
+                type="search" 
+                name="search" 
+                value={this.state.search} 
+                placeholder="Search" 
+                aria-label="Search" 
+                onChange={this.handleInputChange}
+                />
+              </form>
+            </div>
             <br/>
             <div className="col-md-12">
               {filteredUsers.length ? (
