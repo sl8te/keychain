@@ -56,7 +56,7 @@ class View extends Component {
     handleDeleteFriend = id => {
       API.deleteFriend(id)
       .then(res => {
-        window.location.assign("/authenticate")
+        window.location.assign("/friends")
       })
     }
 
