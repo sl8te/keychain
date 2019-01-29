@@ -108,5 +108,17 @@ module.exports = {
             .deleteOne({ _id: req.params.id })
             .then(dbRelationship => res.json(dbRelationship))
             .catch(err => res.status(422).json(err));
+    },
+    userOneDelete: function(req, res) {
+        db.Relationship
+            .deleteMany({ userOneId: req.params.id })
+            .then(dbRelationship => res.json(dbRelationship))
+            .catch(err => res.status(422).json(err));
+    },
+    userTwoDelete: function(req, res) {
+        db.Relationship
+            .deleteMany({ userTwoId: req.params.id })
+            .then(dbRelationship => res.json(dbRelationship))
+            .catch(err => res.status(422).json(err));
     }
 };

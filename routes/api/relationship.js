@@ -24,4 +24,11 @@ router
     .route("/sent/:id")
     .get(relationshipController.findAllSentRequests)
 
+router
+    .route("/userOne/:id")
+    .delete(relationshipController.userOneDelete)
+
+router
+    .route("/userTwo/:id")
+    .delete(relationshipController.userTwoDelete)
   module.exports = router;

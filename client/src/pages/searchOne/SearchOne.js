@@ -18,9 +18,11 @@ class Search extends Component {
       this.checkAuth();
     }
 
-    handleUserInput = (e) => {
-      const name = e.target.name;
-      const value = e.target.value;
+    handleInputChange = event => {
+      // Getting the value and name of the input which triggered the change
+      const { name, value } = event.target;
+
+      // Updating the input's state
       this.setState({
         [name]: value
       });
@@ -29,7 +31,6 @@ class Search extends Component {
     handleSearch = () => {
       API.findAllUsers()      
       .then(res => {
-        console.log(res.data);
         this.setState({ users: res.data })})
     }
 
@@ -42,7 +43,6 @@ class Search extends Component {
         userOneId: this.state.user._id,
         userTwoId: id
       }).then(friendRequest => {
-        console.log(friendRequest);
         window.location.assign("/friends");
       })
     }
@@ -54,7 +54,7 @@ class Search extends Component {
         // check if the data you're getting back has the properties you're looking for
         if(dbUser.data.firstName){
         // set state to fill what the user state is.  Will just add to state
-        console.log(dbUser.data);
+        // console.log(dbUser.data);
         this.setState({ user: dbUser.data});
       }
     })
@@ -62,28 +62,49 @@ class Search extends Component {
 
     render () {
       if(this.state.user.firstName){
+      let filteredUsers = this.state.users.filter(
+        (user) => {
+          return user.firstName.toLowerCase().indexOf(this.state.
+            search.toLowerCase()) !== -1;
+        }
+      );
       return (
-        <form className="searchForm">
-          <h2>User Directory</h2>          
-          <br/>
-          <div className="col-md-12">
-            {this.state.users.length ? (
-              <div className="card">
-                {this.state.users.map(user => (
-                  <div className="card-body" key={user._id}>
-                      <img className="friendImg" src={user.photoLink} />
-                      <strong className="friendName">{user.firstName} {user.lastName}</strong>
-                      <button type="button" className="btnAddfriend btn-success" onClick={() => this.handleAddFriend(user._id)}>Add Friend</button>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <h3>Cannot find this specific user</h3>
-            )}
+        <div>
+            <br/>
+            <h2>User Directory</h2>          
+            <br/>
+            <div className="col-md-12">
+            <br/>
+              <form>
+                <input 
+                className="form-control"
+                type="search" 
+                name="search" 
+                value={this.state.search} 
+                placeholder="Search" 
+                aria-label="Search" 
+                onChange={this.handleInputChange}
+                />
+              </form>
+            </div>
+            <br/>
+            <div className="col-md-12">
+              {filteredUsers.length ? (
+                <div className="card">
+                  {filteredUsers.map(user => (
+                    <div className="card-body" key={user._id}>
+                        <img className="friendImg" src={user.photoLink} />
+                        <strong className="friendName">{user.firstName} {user.lastName}</strong>
+                        <button type="button" className="btnAddfriend btn-success" onClick={() => this.handleAddFriend(user._id)}>Add Friend</button>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <h3>Cannot find this specific user</h3>
+              )}
+            </div>
+            <button type="button" className="btnHome" onClick={this.handleReturn}>Return</button>`
           </div>
-          <p>Return to account page</p>
-          <button type="button" className="btnHome" onClick={this.handleReturn}>Return</button>
-        </form>
           )
         }
         else {

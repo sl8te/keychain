@@ -82,7 +82,7 @@ class View extends Component {
                   </strong>
                   <br />
                   <strong>
-                    Username: {key.username}
+                    Username: <a href={key.link} target="blank">{key.username}</a>
                   </strong>
                 </div>
               ))}

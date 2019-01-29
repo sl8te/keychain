@@ -13,7 +13,9 @@ class Account extends Component {
       isChanging: false,
       confirmPassword: '',
       firstName: '',
-      lastName: '',     
+      lastName: '',
+      photoLink: '',
+      user: '',     
       formErrors: {password: '', confirmPassword: ''},     
       passwordValid: false,
       confirmPasswordValid: false,
@@ -50,7 +52,6 @@ class Account extends Component {
           confirmPasswordValid = false;
           fieldValidationErrors.confirmPassword = " does not match!";
         }
-        console.log(confirmPasswordValid);
         break;
       default:
         break;
@@ -75,23 +76,21 @@ class Account extends Component {
       // check if the data you're getting back has the properties you're looking for
       if(dbUser.data.firstName){
       // set state to fill what the user state is.  Will just add to state
-      this.setState(dbUser.data);
+      this.setState({ user:dbUser.data });
     }
   })
   }
 
   handleFormSubmit = event => {
     event.preventDefault();
-    console.log(`{ password: ${this.state.password}, firstName: ${this.state.firstName}, lastName: ${this.state.lastName} }`);
+    // console.log(`{ password: ${this.state.password}, firstName: ${this.state.firstName}, lastName: ${this.state.lastName} }`);
     API.editUser({
-      // password: this.state.passwordValid,
-      // password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null),
       firstName: this.state.firstName,
-      lastName: this.state.lastName
+      lastName: this.state.lastName,
+      photoLink: this.state.photoLink
     })
     .then( result => {
-      console.log(result);
-      window.location.assign("/login");
+      window.location.assign("/friends");
     })    
   }
 
@@ -101,17 +100,28 @@ class Account extends Component {
     });
   }
 
-  // deleteItem = event => {
-  //   event.preventDefault();
-  //   API.deleteUser({
+  deleteItem = id => {
+    API.deleteUser(id).then(result => {
+      this.handleUserOneDelete(id);
+      this.handleUserTwoDelete(id);
+      window.location.assign("/");
+    })
+  } 
 
-  //   }).then( result => {
-  //     window.location.assign("/");
-  //   })
-  // } 
+  handleUserOneDelete = id => {
+    // console.log(id);
+    API.userOneDelete(id).then(result =>
+      console.log(result + "1"))
+  }
+
+  handleUserTwoDelete = id => {
+    // console.log(id);
+    API.userTwoDelete(id).then(result =>
+      console.log(result + "2"))
+  }
   
   render () {
-    if(this.state.firstName) {
+    if(this.state.user.firstName) {
       return (
         <form className="accountForm">
           <Col size="md-12 profileContent">
@@ -166,7 +176,7 @@ class Account extends Component {
           <br/>
           <br/>
           {/* <button type="submit" className="btn btn-danger" >Delete Account</button> */}
-          <button className="deleteBTN" onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) this.deleteItem(e) } }>
+          <button className="deleteBTN" onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) this.deleteItem(this.state.user._id) } }>
                 Delete Account</button>
         </form>
       )

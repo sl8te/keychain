@@ -96,4 +96,10 @@ export default {
   deleteFriend: function(id) {
     return axios.delete("/api/relationships/" + id);
   },
+  userOneDelete: function(id) {
+    return axios.delete("/api/relationships/userOne/" + id);
+  },
+  userTwoDelete: function(id) {
+    return axios.delete("/api/relationships/userTwo/" + id);
+  }
 };
