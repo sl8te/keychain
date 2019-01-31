@@ -9,7 +9,8 @@ class Login extends Component {
       this.state = {
         email: '',
         password: '',
-        user: ''
+        user: '',
+        error: ''
       }
     }
   
@@ -31,6 +32,9 @@ class Login extends Component {
         .then((user) => {
           // set user to be the desired info
           this.setState({user:user.data});
+        })
+        .catch(function(){
+          alert("Please double check your email or password.  It may be incorrect!");
         })
     }
   
