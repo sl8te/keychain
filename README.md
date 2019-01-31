@@ -29,11 +29,6 @@ Load the app to browser
 after the install is complete, enter "yarn start" in terminal command
 ```
 
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
 ## Built With
 
 * [React](https://reactjs.org/) - User Interface
